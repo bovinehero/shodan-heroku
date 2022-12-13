@@ -16,6 +16,15 @@ def main():
     """ main finction to handle the runtime """
     poc()
 
+    # input IP 
+    # IP validator 
+    # Scan selector 
+    # Scan validator 
+    # Execute Scan 
+    # Scan Incrementor 
+    # Scan Logger 
+    # Display Results 
+
 
 if __name__ == "__main__":
     main()
