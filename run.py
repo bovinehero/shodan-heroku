@@ -21,15 +21,17 @@ SCOPED_CREDS = CREDS.with_scopes(SCOPE)
 GSPREAD_CLIENT = gspread.authorize(SCOPED_CREDS)
 SHEET = GSPREAD_CLIENT.open(title=SHEET_TITLE)
 
-test_sheet = SHEET.worksheet(title="sales")
 
-data = test_sheet.get_all_values()
+def fetch_gspread_data(sheet_title="sales"):
+    """ fetch all data from worksheet """
+    test_sheet = SHEET.worksheet(title=sheet_title)
+    data = test_sheet.get_all_values()
+    print(data)
 
-print(data)
 
 def poc():
     """ just a poc function """
-
+    fetch_gspread_data()
     pass
     # change this to ENVs or getpass.getpass
     # SHODAN_API_KEY = input('Enter your Shodan API Key: ')
