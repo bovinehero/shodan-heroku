@@ -13,6 +13,20 @@ SCOPE = [
     "https://www.googleapis.com/auth/drive"
 ]
 
+# testing connectivity - change to shodan data
+SHEET_TITLE = "love_sandwiches"
+SECRETS_FILE = "secrets.json"
+CREDS = Credentials.from_service_account_file(filename=SECRETS_FILE)
+SCOPED_CREDS = CREDS.with_scopes(SCOPE)
+GSPREAD_CLIENT = gspread.authorize(SCOPED_CREDS)
+SHEET = GSPREAD_CLIENT.open(title=SHEET_TITLE)
+
+test_sheet = SHEET.worksheet(title="sales")
+
+data = test_sheet.get_all_values()
+
+print(data)
+
 def poc():
     """ just a poc function """
 
