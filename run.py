@@ -5,6 +5,7 @@
 # Write your code to expect a terminal of 80 characters wide and 24 rows high
 
 import shodan
+import secrets
 import gspread
 from google.oauth2.service_account import Credentials
 
@@ -18,12 +19,12 @@ SCOPE = [
 
 # testing connectivity - change to shodan data
 SHEET_TITLE = "love_sandwiches"
-SECRETS_FILE = "secrets.json"
+SECRETS_FILE = "gspread_secrets.json"
 CREDS = Credentials.from_service_account_file(filename=SECRETS_FILE)
 SCOPED_CREDS = CREDS.with_scopes(SCOPE)
 GSPREAD_CLIENT = gspread.authorize(SCOPED_CREDS)
 SHEET = GSPREAD_CLIENT.open(title=SHEET_TITLE)
-
+SHODAN_API_KEY = secrets.SHODAN_API_KEY
 
 def fetch_gspread_data(sheet_title="sales"):
     """ fetch all data from worksheet """
