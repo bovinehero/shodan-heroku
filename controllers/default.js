@@ -50,8 +50,18 @@ function socket() {
 }
 
 if (process.env.CREDS != null) {
-    console.log("Creating creds.json file.");
-    fs.writeFile('creds.json', process.env.CREDS, 'utf8', function (err) {
+    console.log("Creating gspread_secrets.json file.");
+    fs.writeFile('gspread_secrets.json', process.env.CREDS, 'utf8', function (err) {
+        if (err) {
+            console.log('Error writing file: ', err);
+            socket.emit("console_output", "Error saving credentials: " + err);
+        }
+    });
+}
+
+if (process.env.SHODAN_API_KEY != null) {
+    console.log("Creating secrets.json file.");
+    fs.writeFile('secrets.json', process.env.SHODAN_API_KEY, 'utf8', function (err) {
         if (err) {
             console.log('Error writing file: ', err);
             socket.emit("console_output", "Error saving credentials: " + err);
