@@ -27,7 +27,7 @@ SHEET = GSPREAD_CLIENT.open(title=SHEET_TITLE)
 SHODAN_API_KEY = secrets.SHODAN_API_KEY
 
 def fetch_gspread_data(sheet_title="ip scans"):
-    """ fetch all data from worksheet """
+    """ fetch all data from worksheet, default is ip scans """
     data = []
     try:
         test_sheet = SHEET.worksheet(title=sheet_title)
@@ -40,9 +40,19 @@ def fetch_gspread_data(sheet_title="ip scans"):
         return data
 
 
+def scan_me(ip="8.8.8.8"):
+    """ poc scan me to test heroku deploy """
+    api = shodan.Shodan(SHODAN_API_KEY)
+    info = api.host(ip)
+    print(info)
+
+
+
 def poc():
     """ just a poc function """
+    ip = input("Please enter IP for target:\n")
     fetch_gspread_data()
+    scan_me(ip)
     # change this to ENVs or getpass.getpass
     # api = shodan.Shodan(SHODAN_API_KEY)
     # info = api.host('8.8.8.8')
