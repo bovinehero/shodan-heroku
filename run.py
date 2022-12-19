@@ -18,7 +18,7 @@ SCOPE = [
 ]
 
 # testing connectivity - change to shodan data
-SHEET_TITLE = "love_sandwiches"
+SHEET_TITLE = "shodan"
 SECRETS_FILE = "gspread_secrets.json"
 CREDS = Credentials.from_service_account_file(filename=SECRETS_FILE)
 SCOPED_CREDS = CREDS.with_scopes(SCOPE)
@@ -26,7 +26,7 @@ GSPREAD_CLIENT = gspread.authorize(SCOPED_CREDS)
 SHEET = GSPREAD_CLIENT.open(title=SHEET_TITLE)
 SHODAN_API_KEY = secrets.SHODAN_API_KEY
 
-def fetch_gspread_data(sheet_title="sales"):
+def fetch_gspread_data(sheet_title="ip scans"):
     """ fetch all data from worksheet """
     data = []
     try:
@@ -44,7 +44,6 @@ def poc():
     """ just a poc function """
     fetch_gspread_data()
     # change this to ENVs or getpass.getpass
-    # SHODAN_API_KEY = input('Enter your Shodan API Key: ')
     # api = shodan.Shodan(SHODAN_API_KEY)
     # info = api.host('8.8.8.8')
     # print(info)
