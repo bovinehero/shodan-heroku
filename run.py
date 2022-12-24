@@ -19,6 +19,7 @@ SCOPE = [
 ]
 
 # testing connectivity - change to shodan data
+SHODAN_SECRETS_FILE = "secrets.json"
 SHEET_TITLE = "shodan"
 SECRETS_FILE = "gspread_secrets.json"
 CREDS = Credentials.from_service_account_file(filename=SECRETS_FILE)
@@ -26,15 +27,19 @@ SCOPED_CREDS = CREDS.with_scopes(SCOPE)
 GSPREAD_CLIENT = gspread.authorize(SCOPED_CREDS)
 SHEET = GSPREAD_CLIENT.open(title=SHEET_TITLE)
 
-def read_secrets() -> dict:
-    filename = os.path.join('secrets.json')
+
+def read_json_file(json_file) -> dict:
+    filename = os.path.join(json_file)
     try:
         with open(filename, mode='r') as f:
             return json.loads(f.read())
     except FileNotFoundError:
         return {}
 
-SHODAN_API_KEY = read_secrets()['SHODAN_API_KEY']
+
+SHODAN_API_KEY = read_json_file(
+    json_file=SHODAN_SECRETS_FILE)['SHODAN_API_KEY']
+
 
 def fetch_gspread_data(sheet_title="ip scans"):
     """ fetch all data from worksheet, default is ip scans """
@@ -54,19 +59,16 @@ def scan_me(ip="8.8.8.8"):
     """ poc scan me to test heroku deploy """
     api = shodan.Shodan(SHODAN_API_KEY)
     info = api.host(ip)
-    print(info)
-
+    print(json.dumps(info, indent=2))
+    return info
 
 
 def poc():
     """ just a poc function """
-    ip = input("Please enter IP for target:\n")
+    # ip = input("Please enter IP for target:\n")
+    ip = '8.8.8.8'
     fetch_gspread_data()
     scan_me(ip)
-    # change this to ENVs or getpass.getpass
-    # api = shodan.Shodan(SHODAN_API_KEY)
-    # info = api.host('8.8.8.8')
-    # print(info)
 
 
 def main():
