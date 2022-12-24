@@ -59,23 +59,37 @@ def fetch_gspread_data(sheet_title="ip scans"):
 def scan_me(ip="8.8.8.8"):
     """ poc scan me to test heroku deploy """
     api = shodan.Shodan(SHODAN_API_KEY)
-    info = api.host(ip)
-    print(json.dumps(info, indent=2))
-    return info
+    data = api.host(ip)
+    print(json.dumps(data, indent=2))
+    print(data['tags'])
+    return data
 
 
-def poc():
-    """ just a poc function """
+def poc_host_scan():
+    """ just a poc scanning results function """
     # ip = input("Please enter IP for target:\n")
-    ip = '8.8.8.8'
+    # ip = '8.8.8.8'
+    ip = '88.199.42.157'
     fetch_gspread_data()
     scan_me(ip)
+
+def poc():
+    """ just a poc details results function """
+    api = shodan.Shodan(SHODAN_API_KEY)
+    # API access info
+    print(api.info())
+    # ports shodan scans
+    print(api.ports())
+    # protocols it checks
+    print(api.protocols())
+    # services it checks
+    print(api.services())
+
 
 
 def main():
     """ main finction to handle the runtime """
     poc()
-
     # input IP
     # IP validator
     # Scan selector
