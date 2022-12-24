@@ -29,6 +29,7 @@ SHEET = GSPREAD_CLIENT.open(title=SHEET_TITLE)
 
 
 def read_json_file(json_file) -> dict:
+    """ read local json file and return as dictionary """
     filename = os.path.join(json_file)
     try:
         with open(filename, mode='r') as f:
