@@ -4,6 +4,8 @@ import os
 import shodan
 
 SHODAN_SECRETS_FILE = "secrets.json"
+ip = "8.8.8.8"
+service = 'nginx'
 
 
 def read_json_file(json_file):
@@ -35,6 +37,13 @@ class ShodanAPI():
     def ports_scanned(self):
         return self.api.ports()
 
+    def ip_scanned(self, ip):
+        return self.api.host(ip)
+
+    def service_search(self, query):
+        return self.api.search(query, page=1, limit=None, offset=None, 
+                               facets=None, minify=True)
+
 
 if __name__ == "__main__":
     shodan_call_one = ShodanAPI(SHODAN_SECRETS_FILE)
@@ -42,3 +51,6 @@ if __name__ == "__main__":
     print(shodan_call_one.protocols_scanned())
     print(shodan_call_one.services_scanned())
     print(shodan_call_one.ports_scanned())
+    print(shodan_call_one.ip_scanned(ip))
+    print(shodan_call_one.service_search(service))
+
