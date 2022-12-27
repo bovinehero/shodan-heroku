@@ -4,10 +4,12 @@ import os
 import shodan
 
 SHODAN_SECRETS_FILE = "secrets.json"
+# sample variables for execution as __main__
 ip = "8.8.8.8"
 service = 'nginx'
 
 
+# potentially move this to run
 def read_json_file(json_file):
     """ read local json file and return as dictionary """
     filename = os.path.join(json_file)
@@ -41,10 +43,11 @@ class ShodanAPI():
         return self.api.host(ip)
 
     def service_search(self, query):
-        return self.api.search(query, page=1, limit=None, offset=None, 
+        return self.api.search(query, page=1, limit=None, offset=None,
                                facets=None, minify=True)
 
 
+# remove this when finished
 if __name__ == "__main__":
     shodan_call_one = ShodanAPI(SHODAN_SECRETS_FILE)
     print(shodan_call_one.api_info())

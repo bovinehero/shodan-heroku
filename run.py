@@ -4,11 +4,11 @@
 # You can delete these comments, but do not change the name of this file
 # Write your code to expect a terminal of 80 characters wide and 24 rows high
 
-import shodan
 import os
 import json
 import gspread
 from google.oauth2.service_account import Credentials
+import shodan_helper
 
 # Google Drive Scope for project
 
@@ -26,6 +26,8 @@ CREDS = Credentials.from_service_account_file(filename=SECRETS_FILE)
 SCOPED_CREDS = CREDS.with_scopes(SCOPE)
 GSPREAD_CLIENT = gspread.authorize(SCOPED_CREDS)
 SHEET = GSPREAD_CLIENT.open(title=SHEET_TITLE)
+
+ip = "8.8.8.8"
 
 
 def read_json_file(json_file) -> dict:
@@ -56,40 +58,17 @@ def fetch_gspread_data(sheet_title="ip scans"):
         return data
 
 
-def scan_me(ip="8.8.8.8"):
-    """ poc scan me to test heroku deploy """
-    api = shodan.Shodan(SHODAN_API_KEY)
-    data = api.host(ip)
-    print(json.dumps(data, indent=2))
-    print(data['tags'])
-    return data
-
-
-def poc_host_scan():
-    """ just a poc scanning results function """
-    # ip = input("Please enter IP for target:\n")
-    # ip = '8.8.8.8'
-    ip = '88.199.42.157'
-    fetch_gspread_data()
-    scan_me(ip)
-
-
 def poc():
     """ just a poc details results function """
-    api = shodan.Shodan(SHODAN_API_KEY)
-    # API access info
-    print(api.info())
-    # ports shodan scans
-    print(api.ports())
-    # protocols it checks
-    print(api.protocols())
-    # services it checks
-    print(api.services())
+    print("I am the PoC Function")
 
 
 def main():
     """ main finction to handle the runtime """
-    poc()
+    # poc()
+    result = shodan_helper.ShodanAPI(secrets_file=SHODAN_SECRETS_FILE)\
+        .ip_scanned(ip=ip)
+    print(json.dumps(result, indent=2))
     # input IP
     # IP validator
     # Scan selector
