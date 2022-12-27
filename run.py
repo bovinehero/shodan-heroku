@@ -73,6 +73,7 @@ def poc_host_scan():
     fetch_gspread_data()
     scan_me(ip)
 
+
 def poc():
     """ just a poc details results function """
     api = shodan.Shodan(SHODAN_API_KEY)
@@ -84,7 +85,6 @@ def poc():
     print(api.protocols())
     # services it checks
     print(api.services())
-
 
 
 def main():
