@@ -26,7 +26,7 @@ GSPREAD_CLIENT = gspread.authorize(SCOPED_CREDS)
 SHEET = GSPREAD_CLIENT.open(title=SHEET_TITLE)
 
 # Temp vars for testing
-ip = "8.8.8.8"
+IP = "8.8.8.8"
 
 
 def fetch_gspread_data(sheet_title="ip scans"):
@@ -40,7 +40,8 @@ def fetch_gspread_data(sheet_title="ip scans"):
     else:
         print(f'[+] Data Retrieved from {sheet_title}')
     finally:
-        return data
+        print('[+] Placeholder to validate the format the data')
+    return data
 
 
 def poc():
@@ -53,7 +54,7 @@ def main():
     # poc()
     result = shodan_helper.ShodanAPI(
         secrets_file=shodan_helper.SHODAN_SECRETS_FILE
-        ).ip_scanned(ip=ip)
+        ).ip_scanned(target_ip=IP)
     print(json.dumps(result, indent=2))
     # input IP
     # IP validator
