@@ -38,11 +38,11 @@ def get_query_data():
     The loop will repeatedly request data, until it is valid.
     """
     while True:
-        print('\n[+] Please enter the IP Address for Shodan Query')
+        print('\n[+] Please enter the IP Address for Shodan to Query')
         print('[+] Data should be IPv4 format, 4 octets period/fullstop')
         print('[+] Example: 8.8.8.8\n')
 
-        ip_str = input('[+] Enter your data here:\n')
+        ip_str = input('[+] Enter target IP Address here:\n')
 
         if validate_user_input(ip_str):
             break
@@ -106,6 +106,6 @@ def main():
 
 
 if __name__ == "__main__":
-    print("[!] Welcome to Shodan dB query tool.")
+    print("Make yourself comfortable, Hacker. Stay a while.")
     while True:
         main()
