@@ -5,6 +5,7 @@
 # Write your code to expect a terminal of 80 characters wide and 24 rows high
 
 import json
+import re
 import gspread
 from google.oauth2.service_account import Credentials
 import shodan_helper
@@ -29,6 +30,43 @@ SHEET = GSPREAD_CLIENT.open(title=SHEET_TITLE)
 IP = "8.8.8.8"
 
 
+def get_query_data():
+    """
+    Get IP target for shodan query.
+    Run a while loop to collect a valid string of data from the user
+    via the terminal, which must be a valid IPv4 String.
+    The loop will repeatedly request data, until it is valid.
+    """
+    while True:
+        print('\n[+] Please enter the IP Address for Shodan Query')
+        print('[+] Data should be IPv4 format, 4 octets period/fullstop')
+        print('[+] Example: 8.8.8.8\n')
+
+        ip_str = input('[+] Enter your data here:\n')
+
+        if validate_user_input(ip_str):
+            break
+
+    return ip_str
+
+
+def validate_user_input(ip_str):
+    """
+    Inside the try, checks if input is valid ipv4.
+    Raises ValueError if not.
+    """
+    valid_regex = \
+        "^((25[0-5]|2[0-4][0-9]|1[0-9][0-9]|[1-9]?[0-9])\.)" \
+        "{3}(25[0-5]|2[0-4][0-9]|1[0-9][0-9]|[1-9]?[0-9])$"
+    if re.search(valid_regex, ip_str):
+        print('\n[+] Valid IP address')
+        return True
+    else:
+        print(f'\n[-] You entered "{ip_str}"') 
+        print('[-] Invalid IP address, please input valid IPv4 address.\n')
+        return False
+
+
 def fetch_gspread_data(sheet_title="ip scans"):
     """ fetch all data from worksheet, default is ip scans """
     data = []
@@ -36,7 +74,7 @@ def fetch_gspread_data(sheet_title="ip scans"):
         test_sheet = SHEET.worksheet(title=sheet_title)
         data = test_sheet.get_all_values()
     except gspread.exceptions.WorksheetNotFound as err:
-        print(f'[!] Unable to find worksheet {err}.')
+        print(f'[-] Unable to find worksheet {err}.')
     else:
         print(f'[+] Data Retrieved from {sheet_title}')
     finally:
@@ -52,9 +90,10 @@ def poc():
 def main():
     """ main finction to handle the runtime """
     # poc()
+    target = get_query_data()
     result = shodan_helper.ShodanAPI(
         secrets_file=shodan_helper.SHODAN_SECRETS_FILE
-        ).ip_scanned(target_ip=IP)
+        ).ip_scanned(target_ip=target)
     print(json.dumps(result, indent=2))
     # input IP
     # IP validator
@@ -67,4 +106,6 @@ def main():
 
 
 if __name__ == "__main__":
-    main()
+    print("[!] Welcome to Shodan dB query tool.")
+    while True:
+        main()
