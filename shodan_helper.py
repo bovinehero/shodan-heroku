@@ -45,7 +45,11 @@ class ShodanAPI():
 
     def ip_scanned(self, target_ip):
         """ return dict based on ip string """
-        return self.api.host(target_ip)
+        try:
+            return self.api.host(target_ip)
+        except shodan.exception.APIError as err:
+            print(f'[-] {err}')
+            print('[-] Please try a different target or contact administrator')
 
     def service_search(self, query):
         """ return dict based on search query string """
