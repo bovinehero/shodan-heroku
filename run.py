@@ -7,6 +7,7 @@
 import json
 import re
 import gspread
+# from gspread_formatting import *
 from google.oauth2.service_account import Credentials
 import shodan_helper
 
@@ -30,7 +31,7 @@ REPORT_HEADERS = [
     "City",
     "Region",
     "OS",
-    "Shodan",
+    "ShodanTags",
     "ISP",
     "Area",
     "Longitude",
@@ -43,9 +44,6 @@ REPORT_HEADERS = [
     "Domains",
     "Orginisation"
 ]
-
-# Temp vars for testing
-IP = "8.8.8.8"
 
 
 def analyse_data(json_data):
@@ -145,27 +143,42 @@ def tool_help():
 
 def clear_worksheet(sheet_title="ip scans"):
     """ this will clear the google sheet for a new report """
-    print('\n[!] Placeholder to clear the worksheet')
+    print('\n[!] Clearing down the worksheet')
     col_count = len(REPORT_HEADERS)
     row_rount = TARGET_LIMIT+1
     try:
         kickstart_report_sheet(sheet_title=sheet_title)
-        # work_sheet = SHEET.worksheet(title=sheet_title)
-        # work_sheet.clear()
-        # work_sheet.update('A1:T2', [REPORT_HEADERS])
-        # work_sheet.format('A1:T1', {'textFormat': {'bold': True}})
     except gspread.exceptions.WorksheetNotFound as err:
         print(f'[-] Unable to find worksheet {err}')
         SHEET.add_worksheet(title=sheet_title, rows=row_rount, cols=col_count)
         kickstart_report_sheet(sheet_title=sheet_title)
-        print(f'[+] New worksheet {sheet_title} created.')
+    finally:
+        print(f'[+] Clean worksheet {sheet_title} created.')
 
 
 def kickstart_report_sheet(sheet_title="ip scans"):
+    """ kickstart a new report worksheet with basic formatting """
     work_sheet = SHEET.worksheet(title=sheet_title)
     work_sheet.clear()
-    work_sheet.update('A1:T2', [REPORT_HEADERS])
-    work_sheet.format('A1:T1', {'textFormat': {'bold': True}})
+    work_sheet.update('1:1', [REPORT_HEADERS])
+    work_sheet.format('1:1', {
+        "backgroundColor": {
+            "red": 0.0,
+            "green": 0.0,
+            "blue": 0.0
+        },
+        "horizontalAlignment": "CENTER",
+        'textFormat': {
+            'bold': True,
+            "fontSize": 10,
+            "foregroundColor": {
+                    "red": 1.0,
+                    "green": 1.0,
+                    "blue": 1.0
+                },
+            }
+        }
+    )
 
 
 def main():
@@ -179,8 +192,6 @@ def main():
 
 
 if __name__ == "__main__":
-    # print("Make yourself comfortable, Hacker. Stay a while.")
-    # while True:
-    #     main()
-    clear_worksheet('testor')
-    print(len(REPORT_HEADERS))
+    print("Make yourself comfortable, Hacker. Stay a while.")
+    while True:
+        main()
