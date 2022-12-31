@@ -4,7 +4,7 @@
 # You can delete these comments, but do not change the name of this file
 # Write your code to expect a terminal of 80 characters wide and 24 rows high
 
-import json
+# import json
 import re
 import gspread
 from google.oauth2.service_account import Credentials
@@ -71,6 +71,7 @@ def analyse_data(json_data, sheet_title="ip scans"):
         domains = str(' '.join(json_data['domains']))
         orginisation = str(json_data['org'])
 
+        print(f"Target: {ip}")
         print(f"City: {city}")
         print(f"Region Code: {region_code}")
         print(f"OS: {os}")
@@ -86,11 +87,10 @@ def analyse_data(json_data, sheet_title="ip scans"):
         print(f"Country Name: {country_name}")
         print(f"Domains: {domains}")
         print(f"Orginisation: {orginisation}")
-
-        print(f'[!] Placeholder to check there are not more than {TARGET_LIMIT} saves.')
-        can_save = True
-        want_to_save = input('[+] press Y to save\n')
-        if 'y' == want_to_save.lower() and can_save:
+        work_sheet = SHEET.worksheet(title=sheet_title)
+        searches = SHEET.worksheet(sheet_title).get_all_values()
+        want_to_save = input('\n[+] press Y to save\n')
+        if 'y' == want_to_save.lower() and len(searches[1:]) < TARGET_LIMIT:
             print('[+] Saving details to report')
             line_to_add = [
                 ip,
@@ -110,15 +110,16 @@ def analyse_data(json_data, sheet_title="ip scans"):
                 domains,
                 orginisation
             ]
-            work_sheet = SHEET.worksheet(title=sheet_title)
             work_sheet.append_row(line_to_add)
+        elif 'y' == want_to_save.lower():
+            print('[-] Oops Report Worksheet is full I cannot save!')
+            print('[-] Either ask admin to increase capacity \
+            or clear report data')
+            print('[-] Not Saving details to report')
         else:
             print('[-] Not Saving details to report')
     else:
         pass
-
-
-    
 
 
 def get_query_data():
@@ -144,7 +145,7 @@ def validate_user_input(ip_str):
     Raises ValueError if not.
     """
     valid_regex = \
-        "^((25[0-5]|2[0-4][0-9]|1[0-9][0-9]|[1-9]?[0-9])\.)" \
+        "^((25[0-5]|2[0-4][0-9]|1[0-9][0-9]|[1-9]?[0-9])\.)"\
         "{3}(25[0-5]|2[0-4][0-9]|1[0-9][0-9]|[1-9]?[0-9])$"
     if ip_str.lower() == "help":
         tool_help()
@@ -239,7 +240,7 @@ def main():
         secrets_file=shodan_helper.SHODAN_SECRETS_FILE
         ).ip_scanned(target_ip=target)
     analyse_data(json_data=result)
-    print(json.dumps(result['data'], indent=2))
+    # print(json.dumps(result, indent=2))
 
 
 if __name__ == "__main__":
