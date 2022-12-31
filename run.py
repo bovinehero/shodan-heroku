@@ -25,6 +25,24 @@ CREDS = Credentials.from_service_account_file(filename=SECRETS_FILE)
 SCOPED_CREDS = CREDS.with_scopes(SCOPE)
 GSPREAD_CLIENT = gspread.authorize(SCOPED_CREDS)
 SHEET = GSPREAD_CLIENT.open(title=SHEET_TITLE)
+TARGET_LIMIT = 12
+REPORT_HEADERS = [
+    "City",
+    "Region",
+    "OS",
+    "Shodan",
+    "ISP",
+    "Area",
+    "Longitude",
+    "LastUpdate",
+    "Ports",
+    "Latitude",
+    "Hostnames",
+    "Country",
+    "Country",
+    "Domains",
+    "Orginisation"
+]
 
 # Temp vars for testing
 IP = "8.8.8.8"
@@ -86,7 +104,8 @@ def validate_user_input(ip_str):
         clear_worksheet()
         return False
     if ip_str.lower() == "summary report":
-        fetch_gspread_data()
+        summary = fetch_gspread_data()
+        print(summary)
         return False
     elif re.search(valid_regex, ip_str):
         print('\n[+] Valid IP address')
@@ -101,14 +120,15 @@ def fetch_gspread_data(sheet_title="ip scans"):
     """ fetch all data from worksheet, default is ip scans """
     data = []
     try:
-        test_sheet = SHEET.worksheet(title=sheet_title)
-        data = test_sheet.get_all_values()
+        work_sheet = SHEET.worksheet(title=sheet_title)
+        data = work_sheet.get_all_values()
     except gspread.exceptions.WorksheetNotFound as err:
         print(f'[-] Unable to find worksheet {err}.')
     else:
         print(f'[+] Data Retrieved from {sheet_title}')
     finally:
         print('[+] Placeholder to allow validation of the data')
+        print(data)
     return data
 
 
@@ -123,9 +143,29 @@ def tool_help():
     input('[!] Press any key to continue\n')
 
 
-def clear_worksheet():
+def clear_worksheet(sheet_title="ip scans"):
     """ this will clear the google sheet for a new report """
     print('\n[!] Placeholder to clear the worksheet')
+    col_count = len(REPORT_HEADERS)
+    row_rount = TARGET_LIMIT+1
+    try:
+        kickstart_report_sheet(sheet_title=sheet_title)
+        # work_sheet = SHEET.worksheet(title=sheet_title)
+        # work_sheet.clear()
+        # work_sheet.update('A1:T2', [REPORT_HEADERS])
+        # work_sheet.format('A1:T1', {'textFormat': {'bold': True}})
+    except gspread.exceptions.WorksheetNotFound as err:
+        print(f'[-] Unable to find worksheet {err}')
+        SHEET.add_worksheet(title=sheet_title, rows=row_rount, cols=col_count)
+        kickstart_report_sheet(sheet_title=sheet_title)
+        print(f'[+] New worksheet {sheet_title} created.')
+
+
+def kickstart_report_sheet(sheet_title="ip scans"):
+    work_sheet = SHEET.worksheet(title=sheet_title)
+    work_sheet.clear()
+    work_sheet.update('A1:T2', [REPORT_HEADERS])
+    work_sheet.format('A1:T1', {'textFormat': {'bold': True}})
 
 
 def main():
@@ -139,6 +179,8 @@ def main():
 
 
 if __name__ == "__main__":
-    print("Make yourself comfortable, Hacker. Stay a while.")
-    while True:
-        main()
+    # print("Make yourself comfortable, Hacker. Stay a while.")
+    # while True:
+    #     main()
+    clear_worksheet('testor')
+    print(len(REPORT_HEADERS))
