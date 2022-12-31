@@ -7,7 +7,6 @@
 import json
 import re
 import gspread
-# from gspread_formatting import *
 from google.oauth2.service_account import Credentials
 import shodan_helper
 
@@ -28,6 +27,7 @@ GSPREAD_CLIENT = gspread.authorize(SCOPED_CREDS)
 SHEET = GSPREAD_CLIENT.open(title=SHEET_TITLE)
 TARGET_LIMIT = 12
 REPORT_HEADERS = [
+    "Target",
     "City",
     "Region",
     "OS",
@@ -46,28 +46,79 @@ REPORT_HEADERS = [
 ]
 
 
-def analyse_data(json_data):
+def analyse_data(json_data, sheet_title="ip scans"):
     """
     Get IP target for shodan query.
     Run a while loop to collect a valid string of data from the user
     via the terminal, which must be a valid IPv4 String.
     The loop will repeatedly request data, until it is valid.
     """
-    print(f"City: {json_data['city']}")
-    print(f"Region Code: {json_data['region_code']}")
-    print(f"OS: {json_data['os']}")
-    print(f"Shodan Tags: {' '.join(json_data['tags'])}")
-    print(f"ISP: {json_data['isp']}")
-    print(f"Area Code: {json_data['area_code']}")
-    print(f"Longitude: {json_data['longitude']}")
-    print(f"Last Updated: {json_data['last_update']}")
-    print(f"Ports: {' '.join(str(i) for i in json_data['ports'])}")
-    print(f"Latitude: {json_data['latitude']}")
-    print(f"Hostnames: {' '.join(json_data['hostnames'])}")
-    print(f"Country Code: {json_data['country_code']}")
-    print(f"Country Name: {json_data['country_name']}")
-    print(f"Domains: {' '.join(json_data['domains'])}")
-    print(f"Orginisation: {json_data['org']}")
+    if json_data:
+        ip = str(json_data['ip_str'])
+        city = str(json_data['city'])
+        region_code = str(json_data['region_code'])
+        os = str(json_data['os'])
+        shodan_tags = str(' '.join(json_data['tags']))
+        isp = str(json_data['isp'])
+        area_code = str(json_data['area_code'])
+        longitude = str(json_data['longitude'])
+        last_update = str(json_data['last_update'])
+        ports = str(', '.join(str(i) for i in json_data['ports']))
+        latitude = str(json_data['latitude'])
+        hostnames = str(', '.join(json_data['hostnames']))
+        country_code = str(json_data['country_code'])
+        country_name = str(json_data['country_name'])
+        domains = str(' '.join(json_data['domains']))
+        orginisation = str(json_data['org'])
+
+        print(f"City: {city}")
+        print(f"Region Code: {region_code}")
+        print(f"OS: {os}")
+        print(f"Shodan Tags: {shodan_tags}")
+        print(f"ISP: {isp}")
+        print(f"Area Code: {area_code}")
+        print(f"Longitude: {longitude}")
+        print(f"Last Updated: {last_update}")
+        print(f"Ports: {ports}")
+        print(f"Latitude: {latitude}")
+        print(f"Hostnames: {hostnames}")
+        print(f"Country Code: {country_code}")
+        print(f"Country Name: {country_name}")
+        print(f"Domains: {domains}")
+        print(f"Orginisation: {orginisation}")
+
+        print(f'[!] Placeholder to check there are not more than {TARGET_LIMIT} saves.')
+        can_save = True
+        want_to_save = input('[+] press Y to save\n')
+        if 'y' == want_to_save.lower() and can_save:
+            print('[+] Saving details to report')
+            line_to_add = [
+                ip,
+                city,
+                region_code,
+                os,
+                shodan_tags,
+                isp,
+                area_code,
+                longitude,
+                last_update,
+                ports,
+                latitude,
+                hostnames,
+                country_code,
+                country_name,
+                domains,
+                orginisation
+            ]
+            work_sheet = SHEET.worksheet(title=sheet_title)
+            work_sheet.append_row(line_to_add)
+        else:
+            print('[-] Not Saving details to report')
+    else:
+        pass
+
+
+    
 
 
 def get_query_data():
@@ -188,7 +239,7 @@ def main():
         secrets_file=shodan_helper.SHODAN_SECRETS_FILE
         ).ip_scanned(target_ip=target)
     analyse_data(json_data=result)
-    # print(json.dumps(result['data'], indent=2))
+    print(json.dumps(result['data'], indent=2))
 
 
 if __name__ == "__main__":

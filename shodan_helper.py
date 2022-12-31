@@ -50,6 +50,7 @@ class ShodanAPI():
         except shodan.exception.APIError as err:
             print(f'[-] {err}')
             print('[-] Please try a different target or contact administrator')
+            return None
 
     def service_search(self, query):
         """ return dict based on search query string """
