@@ -1,13 +1,6 @@
 """ Main Script Run"""
 
-
-## TODO: fetch_gspread_data format data output of scans
-
-# Your code goes here.
-# You can delete these comments, but do not change the name of this file
-# Write your code to expect a terminal of 80 characters wide and 24 rows high
-
-# import json
+import json
 import re
 import gspread
 from google.oauth2.service_account import Credentials
@@ -158,7 +151,7 @@ def validate_user_input(ip_str):
         return False
     if ip_str.lower() == "summary report":
         summary = fetch_gspread_data()
-        print(summary)
+        print(json.dumps(summary, indent=2))
         return False
     elif re.search(valid_regex, ip_str):
         print('\n[+] Valid IP address')
@@ -180,16 +173,18 @@ def fetch_gspread_data(sheet_title="ip scans"):
     else:
         print(f'[+] Data Retrieved from {sheet_title}')
     finally:
-        print('[+] Placeholder to allow validation of the data')
-        print(data)
-    return data
+        print('[+] Preparing Report')
+        report = []
+        for i in data[1:]:
+            report.append(dict(zip(REPORT_HEADERS, i)))
+    return report
 
 
 def tool_help():
     """ run help text """
     print("""\n[!] Special Commands:
-\n\t clear report: this will clear the exisitng data from the report.
-\n\t summary report: this will provide a basic summary of findings\n""")
+\n\tclear report: this will clear the exisitng data from the report.
+\n\tsummary report: this will provide a basic summary of findings in JSON\n""")
     print('[!] Or enter an IP Address for Shodan to Query')
     print('\n[!] Data should be IPv4 format, 4 octets period/fullstop')
     print('[!] Example: 8.8.8.8 or 73.253.15.222\n')
@@ -243,7 +238,6 @@ def main():
         secrets_file=shodan_helper.SHODAN_SECRETS_FILE
         ).ip_scanned(target_ip=target)
     analyse_data(json_data=result)
-    # print(json.dumps(result, indent=2))
 
 
 if __name__ == "__main__":
