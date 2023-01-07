@@ -42,6 +42,21 @@ REPORT_HEADERS = [
 ]
 
 
+def first_run_check(sheet_title="ip scans"):
+    try:
+        work_sheet = SHEET.worksheet(title=sheet_title)
+        data = work_sheet.get_all_values()
+        if data:
+            pass
+    except gspread.exceptions.WorksheetNotFound as err:
+        print(f'[-] Missing Worksheet {err}, building...')
+        clear_worksheet()
+    else:
+        print("[+] All recording systems ready.")
+    finally:
+        print("Make yourself comfortable, Hacker. Stay a while.")
+
+
 def analyse_data(json_data, sheet_title="ip scans"):
     """
     Get IP target for shodan query.
@@ -84,6 +99,7 @@ def analyse_data(json_data, sheet_title="ip scans"):
         print(f"Domains: {domains}")
         print(f"Orginisation: {orginisation}")
         work_sheet = SHEET.worksheet(title=sheet_title)
+        kickstart_report_sheet()
         searches = SHEET.worksheet(sheet_title).get_all_values()
         want_to_save = input('\n[+] press Y to save\n')
         if 'y' == want_to_save.lower() and len(searches[1:]) < TARGET_LIMIT:
@@ -241,6 +257,6 @@ def main():
 
 
 if __name__ == "__main__":
-    print("Make yourself comfortable, Hacker. Stay a while.")
+    first_run_check()
     while True:
         main()
