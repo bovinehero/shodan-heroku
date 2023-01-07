@@ -148,6 +148,7 @@ Summary of site.
 + Live Scans.
 + Reporting Automation - emails, summaries etc.
 + more API functionality
++ create/modify reports for individual users
 
 ## Testing
 
