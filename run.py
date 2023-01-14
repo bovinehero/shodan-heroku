@@ -2,6 +2,7 @@
 
 import json
 import re
+import time
 import gspread
 from google.oauth2.service_account import Credentials
 import shodan_helper
@@ -43,6 +44,7 @@ REPORT_HEADERS = [
 
 
 def first_run_check(sheet_title="ip scans"):
+    """ set up the env """
     try:
         work_sheet = SHEET.worksheet(title=sheet_title)
         data = work_sheet.get_all_values()
@@ -53,8 +55,27 @@ def first_run_check(sheet_title="ip scans"):
         clear_worksheet()
     else:
         print("[+] All recording systems ready.")
+        info = tool_info()
+        print(info['services_scanned'])
+        print(f"\n[+] API connected on the {info['api_info']['plan']} plan ")
+        if info['api_info']['usage_limits']['scan_credits'] > 0:
+            print(f"[+] Total Scan Credits: \
+{info['api_info']['usage_limits']['scan_credits']}")
+            print(f"[+] Scan Credits Remaining: \
+{info['api_info']['scan_credits']}")
+            print("[-] Scans not currently implemented in tool")
+        else:
+            print("[!] API live scans not supported by plan")
+            print("[!] Searches will utilise Shodan dB")
+        print(f"[+] Shodan is capable of reporting on \
+{len(info['protocols_scanned'])} protcols")
+        display_protcols = input('[+] Enter Y to view them\n')
+        if display_protcols.lower() == 'y':
+            for i in info['protocols_scanned']:
+                print(f"[!] {i} : {info['protocols_scanned'][i]}")
+                time.sleep(0.25)
     finally:
-        print("Make yourself comfortable, Hacker. Stay a while.")
+        print("\nMake yourself comfortable, Hacker. Stay a while.")
 
 
 def analyse_data(json_data, sheet_title="ip scans"):
@@ -175,6 +196,20 @@ def validate_user_input(ip_str):
         print(f'\n[-] You entered "{ip_str}"')
         print('[-] Invalid IP address, please input valid IPv4 address.\n')
         return False
+
+
+def tool_info():
+    """ Fetch tooling info """
+    shodan_call = shodan_helper.ShodanAPI(
+        secrets_file=shodan_helper.SHODAN_SECRETS_FILE
+        )
+    print("[+] Checking capabilities with Shodan")
+    return {
+        "api_info": shodan_call.api_info(),
+        "protocols_scanned": shodan_call.protocols_scanned(),
+        "services_scanned": shodan_call.services_scanned(),
+        "ports_scanned": shodan_call.ports_scanned()
+    }
 
 
 def fetch_gspread_data(sheet_title="ip scans"):
