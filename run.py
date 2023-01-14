@@ -55,27 +55,38 @@ def first_run_check(sheet_title="ip scans"):
         clear_worksheet()
     else:
         print("[+] All recording systems ready.")
-        info = tool_info()
-        print(info['services_scanned'])
-        print(f"\n[+] API connected on the {info['api_info']['plan']} plan ")
-        if info['api_info']['usage_limits']['scan_credits'] > 0:
-            print(f"[+] Total Scan Credits: \
-{info['api_info']['usage_limits']['scan_credits']}")
-            print(f"[+] Scan Credits Remaining: \
-{info['api_info']['scan_credits']}")
-            print("[-] Scans not currently implemented in tool")
-        else:
-            print("[!] API live scans not supported by plan")
-            print("[!] Searches will utilise Shodan dB")
-        print(f"[+] Shodan is capable of reporting on \
-{len(info['protocols_scanned'])} protcols")
-        display_protcols = input('[+] Enter Y to view them\n')
-        if display_protcols.lower() == 'y':
-            for i in info['protocols_scanned']:
-                print(f"[!] {i} : {info['protocols_scanned'][i]}")
-                time.sleep(0.25)
+        tool_capability(info=tool_info(), first_load=True)
     finally:
         print("\nMake yourself comfortable, Hacker. Stay a while.")
+
+
+def tool_capability(info, first_load):
+    print(f"\n[+] API connected on the {info['api_info']['plan']} plan ")
+    if info['api_info']['usage_limits']['scan_credits'] > 0:
+        print(f"[+] Total Scan Credits: {info['api_info']['usage_limits']['scan_credits']}")
+        print(f"[+] Scan Credits Remaining: {info['api_info']['scan_credits']}")
+        print("[-] Scans not currently implemented in tool")
+    else:
+        print("[!] API live scans not supported by plan")
+        print("[!] Searches will utilise Shodan dB")
+    print(f"\n[+] Shodan is capable of reporting on {len(info['protocols_scanned'])} protcols over {len(info['ports_scanned'])} ports")
+    if not first_load:
+        display_protcols = input('[+] Enter Y to view protcols\n')
+    else: 
+        display_protcols = False
+    if display_protcols and display_protcols.lower() == 'y':
+        for i in info['protocols_scanned']:
+            print(f"[!] {i} : {info['protocols_scanned'][i]}")
+            time.sleep(0.25)
+    print(f"\n[+] Shodan is capable of scanning {len(info['services_scanned'])} default services")
+    if not first_load:
+        display_services = input('[+] Enter Y to view them\n')
+    else:
+        display_services = False
+    if display_services and display_services.lower() == 'y':
+        for i in info['services_scanned']:
+            print(f"[!] Port {i} is checked for {info['services_scanned'][i]} vulnerabilities")
+            time.sleep(0.25)
 
 
 def analyse_data(json_data, sheet_title="ip scans"):
@@ -189,6 +200,9 @@ def validate_user_input(ip_str):
         summary = fetch_gspread_data()
         print(json.dumps(summary, indent=2))
         return False
+    if ip_str.lower() == "info":
+        tool_capability(info=tool_info(), first_load=False)
+        return False
     elif re.search(valid_regex, ip_str):
         print('\n[+] Valid IP address')
         return True
@@ -233,6 +247,7 @@ def fetch_gspread_data(sheet_title="ip scans"):
 def tool_help():
     """ run help text """
     print("""\n[!] Special Commands:
+\n\tinfo: ask shodan for capabilities based on your API key.
 \n\tclear report: this will clear the exisitng data from the report.
 \n\tsummary report: this will provide a basic summary of findings in JSON\n""")
     print('[!] Or enter an IP Address for Shodan to Query')
