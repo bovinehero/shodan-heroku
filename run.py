@@ -99,7 +99,6 @@ def analyse_data(json_data, sheet_title="ip scans"):
         print(f"Domains: {domains}")
         print(f"Orginisation: {orginisation}")
         work_sheet = SHEET.worksheet(title=sheet_title)
-        kickstart_report_sheet()
         searches = SHEET.worksheet(sheet_title).get_all_values()
         want_to_save = input('\n[+] press Y to save\n')
         if 'y' == want_to_save.lower() and len(searches[1:]) < TARGET_LIMIT:
