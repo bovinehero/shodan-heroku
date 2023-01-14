@@ -167,7 +167,7 @@ def analyse_data(json_data, sheet_title="ip scans"):
             or clear report data')
             print('[-] Not Saving details to report')
         else:
-            print('[-] Not Saving details to report')
+            print('[+] Not Saving details to report')
     else:
         pass
 
@@ -182,7 +182,7 @@ def get_query_data():
     while True:
         print('\n[+] Please enter the IP Address for Shodan to Query')
         print('[+] Use help command for more info')
-        ip_str = input('[+] Enter command:\n')
+        ip_str = input('[+] Enter command or IP Address:\n')
         if validate_user_input(ip_str):
             break
     return ip_str

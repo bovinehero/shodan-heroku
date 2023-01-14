@@ -6,6 +6,16 @@
 
 [Live Site](https://bhero-shodan.herokuapp.com/) is hosted on heroku as a node.js app running python 3 code.
 
+## About
+
+As part of professional services pentration testers utilise Open-source intelligence (OSINT) gathering on public facing endpoints to learn as much as they can about target environments.
+Often the tools used by testers are independent of one another and require translating of results into a common data format that is more easily digestible by the buisness.
+This presented a gap I gap where I could explore using python to reach a remote endpoint and provide data to report in a csv friendly format.
+
+For my submission for PP3 in the Code Institute Full Stack Developer Course I developed a command line tool to interact with the shodan search engine API and read/write data to Google Sheets.
+
+> [Shodan](https://www.shodan.io/) is the first public search engine for Internet-connected devices and offers users a way to discover how exposed different endpoints are to attack.
+
 ## Table of Content
 
 1. [Project Goals](#project-goals)
@@ -65,22 +75,54 @@
 
 ## Design
 
+As a basic terminal app the need for graphical design is limited, readability and ease of use are paramount.
+The graded submission required hosting a terminal implementation within a node.js web app making it the primary area to explore a little creativity.
+
 ### Design Considerations
 
+The orginal concept for the project was to provide a scanning tool that leverages the shodan API to activley scan any endpoint on the internet and then allow storage of the results in a summary fashion in a Google Spreadsheet.
+
+After playing with a PoC for a while it became evident that due to the nature of the public way in which the submissions are graded there were a few immediate considerations I needed to address.
+
+1. Vulnerability Scanning is not legal without the site owner's permission and disruptive scanning can cause a Denial of Service (DoS) to their owner.
+2. Any Scans performed by this tool would utilise a private API key which would link to my account potentially making me liable for damages. For the submission only the search shodan's dB for existing results was implemented, as Shodan already has the results
+3. Multiple users means multiple report sheets/workbooks, while in a local single user environment this is fine a publicly hosted solution (like in heroku) could be abused and tally up significant cost to me, thus storage restrictions were implemented.
+4. The remote hosting solution meant that I needed a remote endpoint to write results to, thus local dB solutions like tinydB and sqlite would not be practical without increasing comlexity.
+
+Although points 2 & 3 could be remedied via a Secure User Management system with a backing dB, a relational databse's incorporation is beyond the scope of this project.
 
 ### Colour
 
+As a basic terminal app the need for graphical design is limited, readability and ease of use are paramount.
+The graded submission required hosting a terminal implementation within a node.js web app making it the primary area to explore a little creativity.
+
+Base white text on a black background was selected for the terminal colours, the only colour edits to the html template was to change the initial red colouration to purple to better fit withinthe shodan background image discussed below. 
 
 ### Fonts
 
-USED MSF messaging standard
+The terminal provided by the heroku app was a little limited with regards to shell features, I stuck with the default font provided.
+This means that when running locally users will benefit from the customisations in their own environment.
+
+As a hacker's tool I elected to follow the terminal messaging convention in the orginal [metasploit framework](https://www.metasploit.com/) in order to assist the user in differentiating the different message types on screen. 
+
++ [+] Execution occured as planned or input required
++ [-] Verbose message that an error has taken place because of design limitation
++ [!] Informational statement 
+
 
 ### Imagery
 
-Shodan Image from system shock 2 press pack
+For the site's background I took the Shodan AI Image from system shock 2 [presspack](https://igdb.se/games/system-shock-2/presskit) as it was a fitting homage to the game that enspired the remote tool.
 
 ### Structure
 
+After a preliminary status check the app launches into a while loop that awaits user input to execute on a special command or search shodan's dB for an IP Address.
+
+The input runs against a validation function to check if an IP address is entered and then queries the Shodan API. 
+
+Any other input, except terminal special functions will return the user back to this state.
+
+In addition the special commands will always return their user back to this state once completed.
 
 ### Workflow
 
@@ -111,9 +153,6 @@ HTML, CSS and JavaScript were used to create the website.
 [GitPod](https://www.gitpod.io/) - for active development 
 
 [Code Institute Python Development Template](https://github.com/Code-Institute-Org/python-essentials-template) - for setting up the initial development environment
-
-[ezgif](https://ezgif.com/) image conversion to webp
-
 
 ## Features
 Summary of site.
@@ -208,7 +247,7 @@ To fork this repository:
 
 > TODO: update this
 
-A custom Heroku app was used to deploy the demo website, however deploying the code for use can be accomplished by can be accomplished by cloning the release branch: 
+A custom Heroku app was used to deploy the demo website, however deploying the code for local use can be accomplished by can be accomplished by cloning the release branch: 
 
 ``` sh
 git clone <url>
