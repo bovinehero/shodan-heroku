@@ -104,10 +104,10 @@ def analyse_data(json_data, sheet_title="ip scans"):
     The loop will repeatedly request data, until it is valid.
     """
     if json_data:
-        ip = str(json_data['ip_str'])
+        ip_addr = str(json_data['ip_str'])
         city = str(json_data['city'])
         region_code = str(json_data['region_code'])
-        os = str(json_data['os'])
+        o_sys = str(json_data['os'])
         shodan_tags = str(' '.join(json_data['tags']))
         isp = str(json_data['isp'])
         area_code = str(json_data['area_code'])
@@ -121,10 +121,10 @@ def analyse_data(json_data, sheet_title="ip scans"):
         domains = str(' '.join(json_data['domains']))
         orginisation = str(json_data['org'])
 
-        print(f"Target: {ip}")
+        print(f"Target: {ip_addr}")
         print(f"City: {city}")
         print(f"Region Code: {region_code}")
-        print(f"OS: {os}")
+        print(f"OS: {o_sys}")
         print(f"Shodan Tags: {shodan_tags}")
         print(f"ISP: {isp}")
         print(f"Area Code: {area_code}")
@@ -143,10 +143,10 @@ def analyse_data(json_data, sheet_title="ip scans"):
         if 'y' == want_to_save.lower() and len(searches[1:]) < TARGET_LIMIT:
             print('[+] Saving details to report')
             line_to_add = [
-                ip,
+                ip_addr,
                 city,
                 region_code,
-                os,
+                o_sys,
                 shodan_tags,
                 isp,
                 area_code,

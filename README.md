@@ -20,11 +20,11 @@ For my submission for PP3 in the Code Institute Full Stack Developer Course I de
 
 1. [Project Goals](#project-goals)
     1. [User Goals](#user-goals)
-    2. [Client Goals](#client-goals)
+    2. [Owner Goals](#owner-goals)
 2. [User Experience](#user-experience)
-    1. [Key Information on the Site](#key-information-on-the-site)
-    2. [Target Audience](#target-audience)
-    3. [User Requirements and Expectations](#user-requirements-and-expectations)
+    1. [Target Audience](#target-audience)
+    2. [User Requirements and Expectations](#user-requirements-and-expectations)
+    3. [User Manual](#user-manual)
     4. [User Stories](#user-stories)
 3. [Design](#design)
     1. [Design Considerations](#design-considerations)
@@ -36,6 +36,7 @@ For my submission for PP3 in the Code Institute Full Stack Developer Course I de
 4. [Technologies Used](#technologies-used)
     1. [Languages](#languages)
     2. [Frameworks and Tools](#frameworks-and-tools)
+    3. [Libraries](#libraries)
 5. [Features](#features)
     1. [Future Implementations](#future-implementations)
     2. [Accessibility Features](#accessibility-features)
@@ -50,27 +51,43 @@ For my submission for PP3 in the Code Institute Full Stack Developer Course I de
 ## Project Goals 
 
 ### User Goals
-+ Goal One
-+ Goal Two
++ Discover the capabilities of the tool
++ Recieve instructions on how to use the tool
++ Discover if the Shodan dB knows about my iP addresses
 
-### Client Goals
-+ Goal One
-+ Goal Two
+### Owner Goals
++ Create an application that allows users to query the shodan API within the limits of the free tier
++ Enable users to record results of their scan for future reporting.
++ Present the solution in a web based format (heroku)
 
 ## User Experience
 
-
-
-### Key Information on the Site
-
-
 ### Target Audience
 
+Security enthusiasts/professionals interested in reporting on the status of their external infrastructure or penetration testers looking for low hanging fruit targets.
 
 ### User Requirements and Expectations
 
++ A simple, error-free experience
++ Straightforward navigation
++ Ability to store/review results
+
+### User Manual
+
+TODO
 
 ### User Stories
+
+1. 
+2. 
+3. 
+4. 
+5. 
+6. 
+7. 
+8. 
+9. 
+10. 
 
 
 ## Design
@@ -112,7 +129,8 @@ As a hacker's tool I elected to follow the terminal messaging convention in the 
 
 ### Imagery
 
-For the site's background I took the Shodan AI Image from system shock 2 [presspack](https://igdb.se/games/system-shock-2/presskit) as it was a fitting homage to the game that enspired the remote tool.
+For the site's background I used the Shodan AI Image from system shock 2 [presspack](https://igdb.se/games/system-shock-2/presskit). 
+As the upstream API's name was inspired by the game's main antogonist I felt this was a fitting homage to it's history.
 
 ### Structure
 
@@ -140,7 +158,7 @@ The Flowchart below shows the initial concept for the site.
 
 App Functionality is all written in Python 3
 
-HTML, CSS and JavaScript were used to create the website.
+HTML, CSS and JavaScript were used to create the website in heroku.
 
 ### Frameworks and Tools
 
@@ -153,6 +171,19 @@ HTML, CSS and JavaScript were used to create the website.
 [GitPod](https://www.gitpod.io/) - for active development 
 
 [Code Institute Python Development Template](https://github.com/Code-Institute-Org/python-essentials-template) - for setting up the initial development environment
+
+### Libraries
+
+#### Python3 Libraries
+json - used to handle json file to dictionary and vice versa.
+re - used in input validation for IP Addresses.
+time - used to delay output to screen.
+os - used to pick up env variable files
+
+#### Third Party Libraries
+[shodan](https://pypi.org/project/shodan/) - used to query shodan web services.
+[gspread](https://pypi.org/project/gspread/) - add and manipulate data in Google Sheets.
+[google-auth-oauthlib](https://pypi.org/project/google-auth-oauthlib/) - used to set up the authentification needed to access the Google API and Google Sheets. 
 
 ## Features
 Summary of site.
@@ -193,9 +224,11 @@ Summary of site.
 
 ### Python Validation
 
-PEP8 Linting was implemented to test python code format.
+PEP8 Linting was implemented to test python code format via the pylint plugin in Visual Studio Code.
 
 PEP8 Results - No Errors Found
+
+![pylint results](docs/images/pylint.png)
 
 X Warnings displayed
 
