@@ -6,6 +6,17 @@
 
 [Live Site](https://bhero-shodan.herokuapp.com/) is hosted on heroku as a node.js app running python 3 code.
 
+
+### TODO:
+
++ Write the User stories
++ Write User Manual
++ Write the Features
++ Test the User Stories
++ Write Unit Tests - Optional
++ Create release branch and document in deployment
+
+
 ## About
 
 As part of professional services pentration testers utilise Open-source intelligence (OSINT) gathering on public facing endpoints to learn as much as they can about target environments.
@@ -228,14 +239,9 @@ PEP8 Linting was implemented to test python code format via the pylint plugin in
 
 PEP8 Results - No Errors Found
 
-![pylint results](docs/images/pylint.png)
+![pylint results](docs/images/pylint-results.png)
 
-X Warnings displayed
-
-| **Level** | **Feature** | **Issue Description** | **Comment** |
-|-------------|-------------|----------------------|-------------|
-| Warning | Feature name / line | Descrition | Comments |
-
+> the gitpod errors are environmental and not related to python
 
 ### Testing user stories
 
