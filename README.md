@@ -183,6 +183,8 @@ X Warnings displayed
 
 ## Bugs
 
+Every time the Y was selected the report was overwritten, fixed by removing kickstart logic to external function and the controls to validate user input logic
+
 ### Big Bug One
 
 Bug summary
