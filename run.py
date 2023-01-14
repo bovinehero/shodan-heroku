@@ -61,31 +61,38 @@ def first_run_check(sheet_title="ip scans"):
 
 
 def tool_capability(info, first_load):
+    """ Detail tool capabiliies """
     print(f"\n[+] API connected on the {info['api_info']['plan']} plan ")
     if info['api_info']['usage_limits']['scan_credits'] > 0:
-        print(f"[+] Total Scan Credits: {info['api_info']['usage_limits']['scan_credits']}")
-        print(f"[+] Scan Credits Remaining: {info['api_info']['scan_credits']}")
+        print(f"[+] Total Scan Credits: \
+{info['api_info']['usage_limits']['scan_credits']}")
+        print(f"[+] Scan Credits Remaining: \
+{info['api_info']['scan_credits']}")
         print("[-] Scans not currently implemented in tool")
     else:
         print("[!] API live scans not supported by plan")
         print("[!] Searches will utilise Shodan dB")
-    print(f"\n[+] Shodan is capable of reporting on {len(info['protocols_scanned'])} protcols over {len(info['ports_scanned'])} ports")
+    print(f"\n[+] Shodan is capable of reporting on \
+{len(info['protocols_scanned'])} protcols over {len(info['ports_scanned'])} \
+ports")
     if not first_load:
         display_protcols = input('[+] Enter Y to view protcols\n')
-    else: 
+    else:
         display_protcols = False
     if display_protcols and display_protcols.lower() == 'y':
         for i in info['protocols_scanned']:
             print(f"[!] {i} : {info['protocols_scanned'][i]}")
             time.sleep(0.25)
-    print(f"\n[+] Shodan is capable of scanning {len(info['services_scanned'])} default services")
+    print(f"\n[+] Shodan is capable of scanning \
+{len(info['services_scanned'])} default services")
     if not first_load:
         display_services = input('[+] Enter Y to view them\n')
     else:
         display_services = False
     if display_services and display_services.lower() == 'y':
         for i in info['services_scanned']:
-            print(f"[!] Port {i} is checked for {info['services_scanned'][i]} vulnerabilities")
+            print(f"[!] Port {i} is checked for \
+{info['services_scanned'][i]} vulnerabilities")
             time.sleep(0.25)
 
 
@@ -188,8 +195,8 @@ def validate_user_input(ip_str):
     Raises ValueError if not.
     """
     valid_regex = \
-        "^((25[0-5]|2[0-4][0-9]|1[0-9][0-9]|[1-9]?[0-9])\.)"\
-        "{3}(25[0-5]|2[0-4][0-9]|1[0-9][0-9]|[1-9]?[0-9])$"
+        "^((25[0-5]|2[0-4][0-9]|1[0-9][0-9]|[1-9]?[0-9])\
+.){3}(25[0-5]|2[0-4][0-9]|1[0-9][0-9]|[1-9]?[0-9])$"
     if ip_str.lower() == "help":
         tool_help()
         return False
