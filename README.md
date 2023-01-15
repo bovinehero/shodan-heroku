@@ -202,7 +202,7 @@ os - used to pick up env variable files
   + Checks Google Sheet to check worksheet set up, creating it if required
   + Reaches out to Shodan API to check the API capabilites and display them to the user
   + Provides a whimsical message from shodan "Make yourself comfortable, Hacker. Stay a while."
-    + User Stories Covered: 3, 4, 12, 13, 8
+    + User Stories Covered: 3, 4, 8, 12, 13
     + Screenshot. <br> ![Load In Check](docs/images/feature-load-in-check.png)
 
 + Main Menu:
@@ -214,7 +214,7 @@ os - used to pick up env variable files
 + Help Command:
   + Shows details about the info, clear report and summary commands
   + Displays an example of how to query the Shodan API via IP
-    + User Stories Covered: 2, 9
+    + User Stories Covered: 2, 8, 9
     + Screenshot. <br> ![Help Command](docs/images/feature-help-command.png)
 
 + Info Command:
@@ -286,25 +286,11 @@ PEP8 Results - No Errors Found
 
 ### Testing user stories
 
-1. As a __Test Persona__, I would like to do some stuff.
-
-| **Feature** | **Action** | **Expected Result** | **Actual Result** |
-|-------------|------------|---------------------|-------------------|
-| Feature | Steps | Expectations  | Works as expected |
-
-
-<br>
-<details>
-<summary>Story Results</summary>
-<br>
-<img alt="X Test Results" src="docs/images/testing-story1.gif">
-</details>
-
 1. As a __User__, I would like to be able to search if the Shodan API has record of an IP I want to scan
 
 | **Feature** | **Action** | **Expected Result** | **Actual Result** |
 |-------------|------------|---------------------|-------------------|
-| Feature | Steps | Expectations  | Works as expected |
+| IP Search | Steps | Expectations  | Works as expected |
 
 <br>
 <details>
@@ -317,7 +303,7 @@ PEP8 Results - No Errors Found
 
 | **Feature** | **Action** | **Expected Result** | **Actual Result** |
 |-------------|------------|---------------------|-------------------|
-| Feature | Steps | Expectations  | Works as expected |
+| Help Command | Steps | Expectations  | Works as expected |
 
 <br>
 <details>
@@ -330,8 +316,8 @@ PEP8 Results - No Errors Found
 
 | **Feature** | **Action** | **Expected Result** | **Actual Result** |
 |-------------|------------|---------------------|-------------------|
-| Feature | Steps | Expectations  | Works as expected |
-
+| First Run Load in Checks | Steps | Expectations  | Works as expected |
+| Info Command | Steps | Expectations  | Works as expected |
 
 <br>
 <details>
@@ -344,7 +330,8 @@ PEP8 Results - No Errors Found
 
 | **Feature** | **Action** | **Expected Result** | **Actual Result** |
 |-------------|------------|---------------------|-------------------|
-| Feature | Steps | Expectations  | Works as expected |
+| First Run Load in Checks | Steps | Expectations  | Works as expected |
+| Info Command | Steps | Expectations  | Works as expected |
 
 <br>
 <details>
@@ -357,7 +344,7 @@ PEP8 Results - No Errors Found
 
 | **Feature** | **Action** | **Expected Result** | **Actual Result** |
 |-------------|------------|---------------------|-------------------|
-| Feature | Steps | Expectations  | Works as expected |
+| Save Search to Workbook | Steps | Expectations  | Works as expected |
 
 <br>
 <details>
@@ -370,7 +357,7 @@ PEP8 Results - No Errors Found
 
 | **Feature** | **Action** | **Expected Result** | **Actual Result** |
 |-------------|------------|---------------------|-------------------|
-| Feature | Steps | Expectations  | Works as expected |
+| Display Summary Report | Steps | Expectations  | Works as expected |
 
 <br>
 <details>
@@ -383,7 +370,7 @@ PEP8 Results - No Errors Found
 
 | **Feature** | **Action** | **Expected Result** | **Actual Result** |
 |-------------|------------|---------------------|-------------------|
-| Feature | Steps | Expectations  | Works as expected |
+| Clear Report | Steps | Expectations  | Works as expected |
 
 <br>
 <details>
@@ -396,6 +383,9 @@ PEP8 Results - No Errors Found
 
 | **Feature** | **Action** | **Expected Result** | **Actual Result** |
 |-------------|------------|---------------------|-------------------|
+| First Run Load in Checks | Steps | Expectations  | Works as expected |
+| Main Menu | Steps | Expectations  | Works as expected |
+| Help Command | Steps | Expectations  | Works as expected |
 | Feature | Steps | Expectations  | Works as expected |
 
 <br>
@@ -409,8 +399,7 @@ PEP8 Results - No Errors Found
 
 | **Feature** | **Action** | **Expected Result** | **Actual Result** |
 |-------------|------------|---------------------|-------------------|
-| Feature | Steps | Expectations  | Works as expected |
-
+| Help Command | Steps | Expectations  | Works as expected |
 
 <br>
 <details>
@@ -423,7 +412,7 @@ PEP8 Results - No Errors Found
 
 | **Feature** | **Action** | **Expected Result** | **Actual Result** |
 |-------------|------------|---------------------|-------------------|
-| Feature | Steps | Expectations  | Works as expected |
+| Main Menu | Steps | Expectations  | Works as expected |
 
 <br>
 <details>
@@ -436,7 +425,7 @@ PEP8 Results - No Errors Found
 
 | **Feature** | **Action** | **Expected Result** | **Actual Result** |
 |-------------|------------|---------------------|-------------------|
-| Feature | Steps | Expectations  | Works as expected |
+| Main Menu | Steps | Expectations  | Works as expected |
 
 <br>
 <details>
@@ -449,7 +438,7 @@ PEP8 Results - No Errors Found
 
 | **Feature** | **Action** | **Expected Result** | **Actual Result** |
 |-------------|------------|---------------------|-------------------|
-| Feature | Steps | Expectations  | Works as expected |
+| First Run Load in Checks | Steps | Expectations  | Works as expected |
 
 <br>
 <details>
@@ -462,7 +451,9 @@ PEP8 Results - No Errors Found
 
 | **Feature** | **Action** | **Expected Result** | **Actual Result** |
 |-------------|------------|---------------------|-------------------|
-| Feature | Steps | Expectations  | Works as expected |
+| First Run Load in Checks | Steps | Expectations  | Works as expected |
+| Save Search to Workbook | Steps | Expectations  | Works as expected |
+| Clear Report | Steps | Expectations  | Works as expected |
 
 <br>
 <details>
