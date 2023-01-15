@@ -12,6 +12,8 @@
 + Write User Manual
 + Test the User Stories
 + Create release branch and document in deployment
++ Data storage dtaa models in workflow
++ Comments to have doc strings
 
 ## About
 
@@ -616,8 +618,6 @@ To clone this repository (with the heroku dependencies):
 4. Type 'git clone' into the terminal and then paste the link you copied in step 3. Press enter.
 
 ## Credits
-
-### Code Used
 
 ### Content
 Text Content for the website was written by the Crytek Employees and was ourced from the store [Page](https://eu-shop.crytek.com/games/hunt-showdown).
