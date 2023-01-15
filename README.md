@@ -9,13 +9,10 @@
 
 ### TODO:
 
-+ git statusWrite the User stories
-+ git statusWrite User Manual
-+ git statusWrite the Features
-+ git statusTest the User Stories
-+ git statusWrite Unit Tests - Optional
-+ git statusCreate release branch and document in deployment
-
++ Write User Manual
++ Test the User Stories
++ Write Unit Tests - Optional
++ Create release branch and document in deployment
 
 ## About
 
@@ -23,7 +20,7 @@ As part of professional services pentration testers utilise Open-source intellig
 Often the tools used by testers are independent of one another and require translating of results into a common data format that is more easily digestible by the buisness.
 This presented a gap I gap where I could explore using python to reach a remote endpoint and provide data to report in a csv friendly format.
 
-For my submission for PP3 in the Code Institute Full Stack Developer Course I developed a command line tool to interact with the shodan search engine API and read/write data to Google Sheets.
+For my submission for PP3 in the Code Institute Full Stack Developer Course I developed a proof of concept command line tool to interact with the shodan search engine API and read/write data to Google Sheets.
 
 > [Shodan](https://www.shodan.io/) is the first public search engine for Internet-connected devices and offers users a way to discover how exposed different endpoints are to attack.
 
@@ -89,16 +86,19 @@ TODO
 
 ### User Stories
 
-1. 
-2. 
-3. 
-4. 
-5. 
-6. 
-7. 
-8. 
-9. 
-10. 
+1. As a User, I would like to be able to search if the Shodan API has record of an IP I want to scan
+2. As a User, I would like instructions on how to use this tool
+3. As a User, I would like to view what services the shodan API scans
+4. As a User, I woud like to view the protocols shodan searches for
+5. As a User, I would like to be able to save my scan results
+6. As a User, I would like to retrieve my saved scan results
+7. As a User, I would like to be able to start a new report when I'm done with the old one
+8. As an Owner, I want users to have a positive experience whilst using the app
+9. As an Owner, I want users to easily discover how to use the app
+10. As an Owner, I want the user to get feedback in case of wrong input
+11. As an Owner, I want data entry to be validated, to guide the user on how to correctly format the input
+12. As an Owner, I want the user to be notified on start up if the app is going to fail due to missing upstream/downstream  
+13. As an Owner, I want users to be able to use this tool within the limits of the API key and reasonable Google Storage limits
 
 
 ## Design
@@ -197,77 +197,80 @@ os - used to pick up env variable files
 [google-auth-oauthlib](https://pypi.org/project/google-auth-oauthlib/) - used to set up the authentification needed to access the Google API and Google Sheets. 
 
 ## Features
-TODO Summary of site.
 
 + First Run Load in Checks
   + Checks Google Sheet to check worksheet set up, creating it if required
   + Reaches out to Shodan API to check the API capabilites and display them to the user
   + Provides a whimsical message from shodan "Make yourself comfortable, Hacker. Stay a while."
-    + User Stories Covered: X
+    + User Stories Covered: 3, 4, 12, 13, 8
     + Screenshot. <br> ![Load In Check](docs/images/feature-load-in-check.png)
 
 + Main Menu:
   + Provides the main interface where the user can execute searches (via IP)
   + Allows user to call help, info, clear report and summary commands
-    + User Stories Covered: X
+    + User Stories Covered: 8, 10, 11 
     + Screenshot. <br> ![Main Menu Prompt](docs/images/feature-main-menu.png)
 
 + Help Command:
   + Shows details about the info, clear report and summary commands
   + Displays an example of how to query the Shodan API via IP
-    + User Stories Covered: X
-    + Screenshot. <br> ![nav menu closed](docs/images/feature-feature3.png)
+    + User Stories Covered: 2, 9
+    + Screenshot. <br> ![Help Command](docs/images/feature-help-command.png)
 
-+ Feature 4:
++ Info Command:
+  + Performs a call to Shodan to retreive the user's current API capabilities 
+  + Provides a live summary of the user's capabilities based on the their plan
+  + Can print out the protocols Shodan looks for with a description of each
+  + Can print out the services and port pairing it checks by default for vulnerabilities
+  + Uses same logic as the first run load in checks feature, but applies interactivity based on the function not being executed on launch.
+    + User Stories Covered: 3, 4
+    + Screenshot. <br> ![Info Command](docs/images/feature-info-commandinfo.png)
 
-  + Summary of feature
-    + User Stories Covered: X
-    + Screenshot. <br> ![nav menu closed](docs/images/feature-feature4.png)
++ IP Search:
+  + Validates an IP Address is valid
+  + Queries Shodan for details on it
+  + Displays a summary for the user
+    + User Stories Covered: 1
+    + Screenshot. <br> ![IP Search](docs/images/feature-ip-search.png)
 
-+ Feature 4:
++ Save Search to Workbook:
+  + Checks Google sheets to determine if data can be saved - outputs message if it cannot
+  + Saves/Appends the result to the worksheet in Google Sheets
+    + User Stories Covered: 5, 13
+    + Screenshot. <br> ![Save Scan in Terminal](docs/images/feature-save-result.png)
+    + Screenshot. <br> ![Save Scan Results Sheet](docs/images/feature-save-result-sheet.png)
 
-  + Summary of feature
-    + User Stories Covered: X
-    + Screenshot. <br> ![nav menu closed](docs/images/feature-feature4.png)
++ Display Summary Report
+  + Reaches our to Google Sheets to fetch saved information
+  + Displays the results in JSON format
+    + User Stories Covered: 6
+    + Screenshot. <br> ![Display the results in JSON](docs/images/feature-summary.png)
 
-+ Feature 4:
-
-  + Summary of feature
-    + User Stories Covered: X
-    + Screenshot. <br> ![nav menu closed](docs/images/feature-feature4.png)
-
-+ Feature 4:
-
-  + Summary of feature
-    + User Stories Covered: X
-    + Screenshot. <br> ![nav menu closed](docs/images/feature-feature4.png)
-
-+ Feature 4:
-
-  + Summary of feature
-    + User Stories Covered: X
-    + Screenshot. <br> ![nav menu closed](docs/images/feature-feature4.png)
-
-+ Feature 4:
-
-  + Summary of feature
-    + User Stories Covered: X
-    + Screenshot. <br> ![nav menu closed](docs/images/feature-feature4.png)
-
-+ Feature 4:
-
-  + Summary of feature
-    + User Stories Covered: X
-    + Screenshot. <br> ![nav menu closed](docs/images/feature-feature4.png)
-
++ Clear Report:
+  + Reaches our to Google Sheets to delete saved information
+  + Creates a new clean, formatted worksheet within safe parameters for usage.
+  + Uses same logic as the first run load in checks feature.
+    + User Stories Covered: 7, 13
+    + Screenshot. <br> ![Clear Report in terminal](docs/images/feature-clear-report.png)
+    + Screenshot. <br> ![Clean Report WorkSheet](docs/images/feature-clear-report-sheet.png)
 
 ### Future Implementations
 
-+ Live Scans.
+The potential scope for this tool is far reaching, but development was hindered by concerns I had in user mangement, access controls and timing constraints due to work commitments.
+As a result scope was deliberately tight in order to deliver core functionality, additional feature implementations I'd like to explore would be around:
+
++ Integration to a web app for reporting, geo mapping and User Access Controls
 + Reporting Automation - emails, summaries etc.
-+ more API functionality
++ more API functionality - Live Scans, Vuln assessments, Domain names as targets
 + create/modify reports for individual users
 + test coverage with pytest/unittest
++ Add in update/delete by row functionality to Google Sheets
++ add more summary report data format options (csv, yaml etc.)
++ More first deploy automation to make tool setup cleaner
++ More Error Handling to account for remote connections
++ Better Upstream API checking and reporting on status
++ dB integration instead of google sheets to allow better results management
++ Random Shodan Quote for message of the day when app is started.
 
 ## Testing
 
@@ -287,7 +290,7 @@ PEP8 Results - No Errors Found
 
 | **Feature** | **Action** | **Expected Result** | **Actual Result** |
 |-------------|------------|---------------------|-------------------|
-| Fature | Steps | Expectations  | Works as expected |
+| Feature | Steps | Expectations  | Works as expected |
 
 
 <br>
@@ -295,6 +298,177 @@ PEP8 Results - No Errors Found
 <summary>Story Results</summary>
 <br>
 <img alt="X Test Results" src="docs/images/testing-story1.gif">
+</details>
+
+1. As a __User__, I would like to be able to search if the Shodan API has record of an IP I want to scan
+
+| **Feature** | **Action** | **Expected Result** | **Actual Result** |
+|-------------|------------|---------------------|-------------------|
+| Feature | Steps | Expectations  | Works as expected |
+
+<br>
+<details>
+<summary>Story Results</summary>
+<br>
+<img alt="X Test Results" src="docs/images/testing-story1.gif">
+</details>
+
+2. As a __User__, I would like instructions on how to use this tool
+
+| **Feature** | **Action** | **Expected Result** | **Actual Result** |
+|-------------|------------|---------------------|-------------------|
+| Feature | Steps | Expectations  | Works as expected |
+
+<br>
+<details>
+<summary>Story Results</summary>
+<br>
+<img alt="X Test Results" src="docs/images/testing-story2.gif">
+</details>
+
+3. As a __User__, I would like to view what services the shodan API scans
+
+| **Feature** | **Action** | **Expected Result** | **Actual Result** |
+|-------------|------------|---------------------|-------------------|
+| Feature | Steps | Expectations  | Works as expected |
+
+
+<br>
+<details>
+<summary>Story Results</summary>
+<br>
+<img alt="X Test Results" src="docs/images/testing-story3.gif">
+</details>
+
+4. As a __User__, I woud like to view the protocols shodan searches for
+
+| **Feature** | **Action** | **Expected Result** | **Actual Result** |
+|-------------|------------|---------------------|-------------------|
+| Feature | Steps | Expectations  | Works as expected |
+
+<br>
+<details>
+<summary>Story Results</summary>
+<br>
+<img alt="X Test Results" src="docs/images/testing-story4.gif">
+</details>
+
+5. As a __User__, I would like to be able to save my scan results
+
+| **Feature** | **Action** | **Expected Result** | **Actual Result** |
+|-------------|------------|---------------------|-------------------|
+| Feature | Steps | Expectations  | Works as expected |
+
+<br>
+<details>
+<summary>Story Results</summary>
+<br>
+<img alt="X Test Results" src="docs/images/testing-story5.gif">
+</details>
+
+6. As a __User__, I would like to retrieve my saved scan results
+
+| **Feature** | **Action** | **Expected Result** | **Actual Result** |
+|-------------|------------|---------------------|-------------------|
+| Feature | Steps | Expectations  | Works as expected |
+
+<br>
+<details>
+<summary>Story Results</summary>
+<br>
+<img alt="X Test Results" src="docs/images/testing-story6.gif">
+</details>
+
+7. As a __User__, I would like to be able to start a new report when I'm done with the old one
+
+| **Feature** | **Action** | **Expected Result** | **Actual Result** |
+|-------------|------------|---------------------|-------------------|
+| Feature | Steps | Expectations  | Works as expected |
+
+<br>
+<details>
+<summary>Story Results</summary>
+<br>
+<img alt="X Test Results" src="docs/images/testing-story7.gif">
+</details>
+
+8. As an __Owner__, I want users to have a positive experience whilst using the app
+
+| **Feature** | **Action** | **Expected Result** | **Actual Result** |
+|-------------|------------|---------------------|-------------------|
+| Feature | Steps | Expectations  | Works as expected |
+
+<br>
+<details>
+<summary>Story Results</summary>
+<br>
+<img alt="X Test Results" src="docs/images/testing-story8.gif">
+</details>
+
+9. As an __Owner__, I want users to easily discover how to use the app
+
+| **Feature** | **Action** | **Expected Result** | **Actual Result** |
+|-------------|------------|---------------------|-------------------|
+| Feature | Steps | Expectations  | Works as expected |
+
+
+<br>
+<details>
+<summary>Story Results</summary>
+<br>
+<img alt="X Test Results" src="docs/images/testing-story9.gif">
+</details>
+
+10. As an __Owner__, I want the user to get feedback in case of wrong input
+
+| **Feature** | **Action** | **Expected Result** | **Actual Result** |
+|-------------|------------|---------------------|-------------------|
+| Feature | Steps | Expectations  | Works as expected |
+
+<br>
+<details>
+<summary>Story Results</summary>
+<br>
+<img alt="X Test Results" src="docs/images/testing-story10.gif">
+</details>
+
+11. As an __Owner__, I want data entry to be validated, to guide the user on how to correctly format the input
+
+| **Feature** | **Action** | **Expected Result** | **Actual Result** |
+|-------------|------------|---------------------|-------------------|
+| Feature | Steps | Expectations  | Works as expected |
+
+<br>
+<details>
+<summary>Story Results</summary>
+<br>
+<img alt="X Test Results" src="docs/images/testing-story11.gif">
+</details>
+
+12. As an __Owner__, I want the user to be notified on start up if the app is going to fail due to missing upstream/downstream  
+
+| **Feature** | **Action** | **Expected Result** | **Actual Result** |
+|-------------|------------|---------------------|-------------------|
+| Feature | Steps | Expectations  | Works as expected |
+
+<br>
+<details>
+<summary>Story Results</summary>
+<br>
+<img alt="X Test Results" src="docs/images/testing-story12.gif">
+</details>
+
+13. As an __Owner__, I want users to be able to use this tool within the limits of the API key and reasonable Google Storage limits
+
+| **Feature** | **Action** | **Expected Result** | **Actual Result** |
+|-------------|------------|---------------------|-------------------|
+| Feature | Steps | Expectations  | Works as expected |
+
+<br>
+<details>
+<summary>Story Results</summary>
+<br>
+<img alt="X Test Results" src="docs/images/testing-story13.gif">
 </details>
 
 ## Bugs
