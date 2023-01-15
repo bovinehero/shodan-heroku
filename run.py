@@ -164,7 +164,7 @@ def analyse_data(json_data, sheet_title="ip scans"):
         elif 'y' == want_to_save.lower():
             print('[-] Oops Report Worksheet is full I cannot save!')
             print('[-] Either ask admin to increase capacity \
-            or clear report data')
+or clear report data')
             print('[-] Not Saving details to report')
         else:
             print('[+] Not Saving details to report')

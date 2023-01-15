@@ -12,7 +12,7 @@
 + Write User Manual
 + Test the User Stories
 + Create release branch and document in deployment
-+ Data storage dtaa models in workflow
++ Data storage data models in workflow
 + Comments to have doc strings
 
 ## About
@@ -393,10 +393,17 @@ As a result of my oversight manual testing would take up most of the responsibil
 
 <br>
 <details>
-<summary>Story Results</summary>
+<summary>Save to Empty Workbook</summary>
 <br>
-<img alt="X Test Results" src="docs/images/testing-feature1.gif">
+<img alt="Save to Empty Workbook Results" src="docs/images/testing-save-to-workbook.gif">
 </details>
+<br>
+<details>
+<summary>Save to Empty Workbook</summary>
+<br>
+<img alt="Save to Empty Workbook Results" src="docs/images/testing-save-to-full-workbook.gif">
+</details>
+
 
 6. As a __User__, I would like to retrieve my saved scan results
 
