@@ -9,12 +9,12 @@
 
 ### TODO:
 
-+ Write the User stories
-+ Write User Manual
-+ Write the Features
-+ Test the User Stories
-+ Write Unit Tests - Optional
-+ Create release branch and document in deployment
++ git statusWrite the User stories
++ git statusWrite User Manual
++ git statusWrite the Features
++ git statusTest the User Stories
++ git statusWrite Unit Tests - Optional
++ git statusCreate release branch and document in deployment
 
 
 ## About
@@ -197,31 +197,68 @@ os - used to pick up env variable files
 [google-auth-oauthlib](https://pypi.org/project/google-auth-oauthlib/) - used to set up the authentification needed to access the Google API and Google Sheets. 
 
 ## Features
-Summary of site.
+TODO Summary of site.
 
-+ Feature 1:
-
-  + Summary of feature
++ First Run Load in Checks
+  + Checks Google Sheet to check worksheet set up, creating it if required
+  + Reaches out to Shodan API to check the API capabilites and display them to the user
+  + Provides a whimsical message from shodan "Make yourself comfortable, Hacker. Stay a while."
     + User Stories Covered: X
-    + Scrrenshot. <br> ![nav menu closed](docs/images/feature-feature1.png)
+    + Screenshot. <br> ![Load In Check](docs/images/feature-load-in-check.png)
 
-+ Feature 2:
-
-  + Summary of feature
++ Main Menu:
+  + Provides the main interface where the user can execute searches (via IP)
+  + Allows user to call help, info, clear report and summary commands
     + User Stories Covered: X
-    + Scrrenshot. <br> ![nav menu closed](docs/images/feature-feature2.png)
+    + Screenshot. <br> ![Main Menu Prompt](docs/images/feature-main-menu.png)
 
-+ Feature 3:
-
-  + Summary of feature
++ Help Command:
+  + Shows details about the info, clear report and summary commands
+  + Displays an example of how to query the Shodan API via IP
     + User Stories Covered: X
-    + Scrrenshot. <br> ![nav menu closed](docs/images/feature-feature3.png)
+    + Screenshot. <br> ![nav menu closed](docs/images/feature-feature3.png)
 
 + Feature 4:
 
   + Summary of feature
     + User Stories Covered: X
-    + Scrrenshot. <br> ![nav menu closed](docs/images/feature-feature4.png)
+    + Screenshot. <br> ![nav menu closed](docs/images/feature-feature4.png)
+
++ Feature 4:
+
+  + Summary of feature
+    + User Stories Covered: X
+    + Screenshot. <br> ![nav menu closed](docs/images/feature-feature4.png)
+
++ Feature 4:
+
+  + Summary of feature
+    + User Stories Covered: X
+    + Screenshot. <br> ![nav menu closed](docs/images/feature-feature4.png)
+
++ Feature 4:
+
+  + Summary of feature
+    + User Stories Covered: X
+    + Screenshot. <br> ![nav menu closed](docs/images/feature-feature4.png)
+
++ Feature 4:
+
+  + Summary of feature
+    + User Stories Covered: X
+    + Screenshot. <br> ![nav menu closed](docs/images/feature-feature4.png)
+
++ Feature 4:
+
+  + Summary of feature
+    + User Stories Covered: X
+    + Screenshot. <br> ![nav menu closed](docs/images/feature-feature4.png)
+
++ Feature 4:
+
+  + Summary of feature
+    + User Stories Covered: X
+    + Screenshot. <br> ![nav menu closed](docs/images/feature-feature4.png)
 
 
 ### Future Implementations
@@ -230,6 +267,7 @@ Summary of site.
 + Reporting Automation - emails, summaries etc.
 + more API functionality
 + create/modify reports for individual users
++ test coverage with pytest/unittest
 
 ## Testing
 

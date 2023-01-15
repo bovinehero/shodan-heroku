@@ -260,7 +260,7 @@ def tool_help():
     print('[!] Or enter an IP Address for Shodan to Query')
     print('\n[!] Data should be IPv4 format, 4 octets period/fullstop')
     print('[!] Example: 8.8.8.8 or 73.253.15.222\n')
-    input('[!] Press any key to continue\n')
+    input('[!] Press return/enter to continue\n')
 
 
 def clear_worksheet(sheet_title="ip scans"):
