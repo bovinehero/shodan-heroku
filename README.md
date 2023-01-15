@@ -352,9 +352,9 @@ As a result of my oversight manual testing would take up most of the responsibil
 </details>
 <br>
 <details>
-<summary>Info Command Display Items</summary>
+<summary>Info Command Display Services</summary>
 <br>
-<img alt="Info Command Results" src="docs/images/testing-info-command-display.gif">
+<img alt="Info Command Results" src="docs/images/testing-info-command-display-services.gif">
 </details>
 
 4. As a __User__, I woud like to view the protocols shodan searches for
@@ -378,9 +378,9 @@ As a result of my oversight manual testing would take up most of the responsibil
 </details>
 <br>
 <details>
-<summary>Info Command Display Items</summary>
+<summary>Info Command Display Protocols</summary>
 <br>
-<img alt="Info Command Results" src="docs/images/testing-info-command-display.gif">
+<img alt="Info Command Results" src="docs/images/testing-info-command-display-protocols.gif">
 </details>
 
 5. As a __User__, I would like to be able to save my scan results
