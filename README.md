@@ -10,7 +10,7 @@
 ### TODO:
 
 + Write User Manual
-+ Test the User Stories
++ Finish Testing the User Stories
 + Create release branch and document in deployment
 + Data storage data models in workflow
 + Comments to have doc strings
@@ -399,7 +399,7 @@ As a result of my oversight manual testing would take up most of the responsibil
 </details>
 <br>
 <details>
-<summary>Save to Empty Workbook</summary>
+<summary>Save to Full Workbook</summary>
 <br>
 <img alt="Save to Empty Workbook Results" src="docs/images/testing-save-to-full-workbook.gif">
 </details>
@@ -413,9 +413,9 @@ As a result of my oversight manual testing would take up most of the responsibil
 
 <br>
 <details>
-<summary>Story Results</summary>
+<summary>Display Summary Report</summary>
 <br>
-<img alt="X Test Results" src="docs/images/testing-story6.gif">
+<img alt="Display Summary Report Results" src="docs/images/testing-display-summary.gif">
 </details>
 
 7. As a __User__, I would like to be able to start a new report when I'm done with the old one
@@ -426,10 +426,11 @@ As a result of my oversight manual testing would take up most of the responsibil
 
 <br>
 <details>
-<summary>Story Results</summary>
+<summary>Clear Report</summary>
 <br>
-<img alt="X Test Results" src="docs/images/testing-story7.gif">
+<img alt="Clear Report Results" src="docs/images/testing-clear-report.gif">
 </details>
+
 
 8. As an __Owner__, I want users to have a positive experience whilst using the app
 
@@ -526,21 +527,50 @@ As a result of my oversight manual testing would take up most of the responsibil
 </details>
 <br>
 <details>
-<summary>Story Results</summary>
+<summary>Save to Empty Workbook</summary>
 <br>
-<img alt="X Test Results" src="docs/images/testing-feature2.gif">
+<img alt="Save to Empty Workbook Results" src="docs/images/testing-save-to-workbook.gif">
 </details>
 <br>
 <details>
-<summary>Story Results</summary>
+<summary>Save to Full Workbook</summary>
 <br>
-<img alt="X Test Results" src="docs/images/testing-feature3.gif">
+<img alt="Save to Empty Workbook Results" src="docs/images/testing-save-to-full-workbook.gif">
+</details>
+<br>
+<details>
+<summary>Clear Report</summary>
+<br>
+<img alt="Clear Report Results" src="docs/images/testing-clear-report.gif">
 </details>
 
 
 ## Bugs
 
 Every time the Y was selected the report was overwritten, fixed by removing kickstart logic to external function and the controls to validate user input logic
+
+Following PEP formatting I introduced a lot of whitespace issues like so:
+![Whitespace Bug](docs/images/bug-whitespace.png)
+These were remediated by reducing the whitespace from code like:
+
+``` py
+  #...
+            print('[-] Either ask admin to increase capacity \
+            or clear report data')
+
+  #...
+```
+
+to
+
+``` py
+  #...
+            print('[-] Either ask admin to increase capacity \
+or clear report data')
+
+  #...
+```
+
 
 ### Big Bug One
 
