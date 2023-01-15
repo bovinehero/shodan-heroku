@@ -7,3 +7,4 @@ __pycache__/
 node_modules/
 .github/
 *secrets*
+.pytest_cache/

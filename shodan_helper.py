@@ -4,7 +4,6 @@ import os
 import shodan
 
 SHODAN_SECRETS_FILE = "secrets.json"
-# sample variables for execution as __main__ delete these when finished
 IP = "8.8.8.8"
 SERVICE = 'nginx'
 
@@ -52,18 +51,11 @@ class ShodanAPI():
             print('[-] Please try a different target or contact administrator')
             return None
 
-    def service_search(self, query):
-        """ return dict based on search query string """
-        return self.api.search(query, page=1, limit=None, offset=None,
-                               facets=None, minify=True)
-
-
-# remove this when finished
 if __name__ == "__main__":
+    print("Calling Shodan to check env is set correctly")
     shodan_call_one = ShodanAPI(SHODAN_SECRETS_FILE)
     print(shodan_call_one.api_info())
     print(shodan_call_one.protocols_scanned())
     print(shodan_call_one.services_scanned())
     print(shodan_call_one.ports_scanned())
     print(shodan_call_one.ip_scanned(IP))
-    print(shodan_call_one.service_search(SERVICE))

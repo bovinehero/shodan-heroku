@@ -11,7 +11,6 @@
 
 + Write User Manual
 + Test the User Stories
-+ Write Unit Tests - Optional
 + Create release branch and document in deployment
 
 ## About
@@ -183,6 +182,8 @@ HTML, CSS and JavaScript were used to create the website in heroku.
 
 [Code Institute Python Development Template](https://github.com/Code-Institute-Org/python-essentials-template) - for setting up the initial development environment
 
+[ezgif](https://ezgif.com/) image/media conversion to webp and gif for documentation
+
 ### Libraries
 
 #### Python3 Libraries
@@ -284,6 +285,24 @@ PEP8 Results - No Errors Found
 
 > the gitpod errors are environmental and not related to python
 
+### Automated Testing
+
+After building the base project I experimented with using pytest to perform some automated testing. While all the tests passed the test suite is predominantly limited to `test_shodan_helper.py`.
+
+The structure of the code in `run.py` would require the set up of a testing env to execute on as the tests impact the production set up. I did not anticipate this during development and failed to allocate sufficient time to develop this. 
+
+I used the following code to test the app:
+
+``` sh
+pip install pytest
+pytest -qvl test_run.py
+pytest -qvl test_shodan_helper.py
+```
+
+![pytest results](docs/images/testing-pytest.png)
+
+As a result of my oversight manual testing would take up most of the responsibility.
+
 ### Testing user stories
 
 1. As a __User__, I would like to be able to search if the Shodan API has record of an IP I want to scan
@@ -296,7 +315,7 @@ PEP8 Results - No Errors Found
 <details>
 <summary>Story Results</summary>
 <br>
-<img alt="X Test Results" src="docs/images/testing-story1.gif">
+<img alt="X Test Results" src="docs/images/testing-feature1.gif">
 </details>
 
 2. As a __User__, I would like instructions on how to use this tool
@@ -307,9 +326,9 @@ PEP8 Results - No Errors Found
 
 <br>
 <details>
-<summary>Story Results</summary>
+<summary>Help Command</summary>
 <br>
-<img alt="X Test Results" src="docs/images/testing-story2.gif">
+<img alt="Help Command Results" src="docs/images/testing-help-command.gif">
 </details>
 
 3. As a __User__, I would like to view what services the shodan API scans
@@ -321,9 +340,21 @@ PEP8 Results - No Errors Found
 
 <br>
 <details>
-<summary>Story Results</summary>
+<summary>First Run Load in Checks</summary>
 <br>
-<img alt="X Test Results" src="docs/images/testing-story3.gif">
+<img alt="First Run Load in Checks Results" src="docs/images/testing-first-run-load-in-checks.gif">
+</details>
+<br>
+<details>
+<summary>Info Command No Display</summary>
+<br>
+<img alt="Info Command Results" src="docs/images/testing-info-command-no.gif">
+</details>
+<br>
+<details>
+<summary>Info Command Display Items</summary>
+<br>
+<img alt="Info Command Results" src="docs/images/testing-info-command-display.gif">
 </details>
 
 4. As a __User__, I woud like to view the protocols shodan searches for
@@ -335,9 +366,21 @@ PEP8 Results - No Errors Found
 
 <br>
 <details>
-<summary>Story Results</summary>
+<summary>First Run Load in Checks</summary>
 <br>
-<img alt="X Test Results" src="docs/images/testing-story4.gif">
+<img alt="First Run Load in Checks Results" src="docs/images/testing-first-run-load-in-checks.gif">
+</details>
+<br>
+<details>
+<summary>Info Command No Display</summary>
+<br>
+<img alt="Info Command Results" src="docs/images/testing-info-command-no.gif">
+</details>
+<br>
+<details>
+<summary>Info Command Display Items</summary>
+<br>
+<img alt="Info Command Results" src="docs/images/testing-info-command-display.gif">
 </details>
 
 5. As a __User__, I would like to be able to save my scan results
@@ -350,7 +393,7 @@ PEP8 Results - No Errors Found
 <details>
 <summary>Story Results</summary>
 <br>
-<img alt="X Test Results" src="docs/images/testing-story5.gif">
+<img alt="X Test Results" src="docs/images/testing-feature1.gif">
 </details>
 
 6. As a __User__, I would like to retrieve my saved scan results
@@ -386,13 +429,24 @@ PEP8 Results - No Errors Found
 | First Run Load in Checks | Steps | Expectations  | Works as expected |
 | Main Menu | Steps | Expectations  | Works as expected |
 | Help Command | Steps | Expectations  | Works as expected |
-| Feature | Steps | Expectations  | Works as expected |
 
+<br>
+<details>
+<summary>First Run Load in Checks</summary>
+<br>
+<img alt="First Run Load in Checks Results" src="docs/images/testing-first-run-load-in-checks.gif">
+</details>
 <br>
 <details>
 <summary>Story Results</summary>
 <br>
-<img alt="X Test Results" src="docs/images/testing-story8.gif">
+<img alt="X Test Results" src="docs/images/testing-feature2.gif">
+</details>
+<br>
+<details>
+<summary>Help Command</summary>
+<br>
+<img alt="Help Command Results" src="docs/images/testing-help-command.gif">
 </details>
 
 9. As an __Owner__, I want users to easily discover how to use the app
@@ -403,9 +457,9 @@ PEP8 Results - No Errors Found
 
 <br>
 <details>
-<summary>Story Results</summary>
+<summary>Help Command</summary>
 <br>
-<img alt="X Test Results" src="docs/images/testing-story9.gif">
+<img alt="Help Command Results" src="docs/images/testing-help-command.gif">
 </details>
 
 10. As an __Owner__, I want the user to get feedback in case of wrong input
@@ -418,7 +472,7 @@ PEP8 Results - No Errors Found
 <details>
 <summary>Story Results</summary>
 <br>
-<img alt="X Test Results" src="docs/images/testing-story10.gif">
+<img alt="X Test Results" src="docs/images/testing-main-menu.gif">
 </details>
 
 11. As an __Owner__, I want data entry to be validated, to guide the user on how to correctly format the input
@@ -431,7 +485,7 @@ PEP8 Results - No Errors Found
 <details>
 <summary>Story Results</summary>
 <br>
-<img alt="X Test Results" src="docs/images/testing-story11.gif">
+<img alt="X Test Results" src="docs/images/testing-main-menu.gif">
 </details>
 
 12. As an __Owner__, I want the user to be notified on start up if the app is going to fail due to missing upstream/downstream  
@@ -442,9 +496,9 @@ PEP8 Results - No Errors Found
 
 <br>
 <details>
-<summary>Story Results</summary>
+<summary>First Run Load in Checks</summary>
 <br>
-<img alt="X Test Results" src="docs/images/testing-story12.gif">
+<img alt="First Run Load in Checks Results" src="docs/images/testing-first-run-load-in-checks.gif">
 </details>
 
 13. As an __Owner__, I want users to be able to use this tool within the limits of the API key and reasonable Google Storage limits
@@ -457,10 +511,23 @@ PEP8 Results - No Errors Found
 
 <br>
 <details>
+<summary>First Run Load in Checks</summary>
+<br>
+<img alt="First Run Load in Checks Results" src="docs/images/testing-first-run-load-in-checks.gif">
+</details>
+<br>
+<details>
 <summary>Story Results</summary>
 <br>
-<img alt="X Test Results" src="docs/images/testing-story13.gif">
+<img alt="X Test Results" src="docs/images/testing-feature2.gif">
 </details>
+<br>
+<details>
+<summary>Story Results</summary>
+<br>
+<img alt="X Test Results" src="docs/images/testing-feature3.gif">
+</details>
+
 
 ## Bugs
 
@@ -551,7 +618,6 @@ To clone this repository (with the heroku dependencies):
 ## Credits
 
 ### Code Used
-
 
 ### Content
 Text Content for the website was written by the Crytek Employees and was ourced from the store [Page](https://eu-shop.crytek.com/games/hunt-showdown).
