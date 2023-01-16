@@ -9,7 +9,7 @@
 [Google Sheet](https://docs.google.com/spreadsheets/d/1M0zQoGMlJFKAZRlaijUbdoycJxjvHleksSBca_8Yu3w/edit#gid=387475559) to store results
 
 
-For loacal version of the tool use the [release](https://github.com/bovinehero/shodan-heroku/tree/release) version of this repo
+For local version of the tool use the [release](https://github.com/bovinehero/shodan-heroku/tree/release) version of this repo
 
 ## About
 
