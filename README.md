@@ -10,10 +10,7 @@
 
 ### TODO:
 
-
-+ Finish Testing the User Stories
 + Create release branch and document in deployment
-+ Comments to have doc strings
 
 ## About
 
@@ -350,13 +347,13 @@ As a result of my oversight manual testing would take up most of the responsibil
 
 | **Feature** | **Action** | **Expected Result** | **Actual Result** |
 |-------------|------------|---------------------|-------------------|
-| IP Search | Steps | Expectations  | Works as expected |
+| IP Search | From Main Menu input any valid IP address | Input should be sent to shodan with an error message or data retrieved presented to user.  | Works as expected |
 
 <br>
 <details>
-<summary>Story Results</summary>
+<summary>IP Search</summary>
 <br>
-<img alt="X Test Results" src="docs/images/testing-ip-search.gif">
+<img alt="IP Search Results" src="docs/images/testing-ip-search.gif">
 </details>
 <br>
 
@@ -364,7 +361,7 @@ As a result of my oversight manual testing would take up most of the responsibil
 
 | **Feature** | **Action** | **Expected Result** | **Actual Result** |
 |-------------|------------|---------------------|-------------------|
-| Help Command | Steps | Expectations  | Works as expected |
+| Help Command | From Main Menu input "help" | App should present user with help message  | Works as expected |
 
 <br>
 <details>
@@ -378,8 +375,8 @@ As a result of my oversight manual testing would take up most of the responsibil
 
 | **Feature** | **Action** | **Expected Result** | **Actual Result** |
 |-------------|------------|---------------------|-------------------|
-| First Run Load in Checks | Steps | Expectations  | Works as expected |
-| Info Command | Steps | Expectations  | Works as expected |
+| First Run Load in Checks | Executes when app is reloaded | Checks shodan and google sheets are responsive and displays capability summary and storage readiness  | Works as expected |
+| Info Command | From Main Menu input "help", then "Y" | Displays a summary of capability then prints out services one by one  | Works as expected |
 
 <br>
 <details>
@@ -405,8 +402,8 @@ As a result of my oversight manual testing would take up most of the responsibil
 
 | **Feature** | **Action** | **Expected Result** | **Actual Result** |
 |-------------|------------|---------------------|-------------------|
-| First Run Load in Checks | Steps | Expectations  | Works as expected |
-| Info Command | Steps | Expectations  | Works as expected |
+| First Run Load in Checks | Executes when app is reloaded | Checks shodan and google sheets are responsive and displays capability summary and storage readiness  | Works as expected |
+| Info Command | From Main Menu input "help", then any key except "Y", then "Y" | Displays a summary of capability then prints out protocols one by one  | Works as expected |
 
 <br>
 <details>
@@ -432,13 +429,14 @@ As a result of my oversight manual testing would take up most of the responsibil
 
 | **Feature** | **Action** | **Expected Result** | **Actual Result** |
 |-------------|------------|---------------------|-------------------|
-| Save Search to Workbook | Steps | Expectations  | Works as expected |
+| Save Search to Non Full Workbook | After successful IP search, press "y" | Data saved to spreadsheet and confirmation displayed to user  | Works as expected |
+| Save Search to Full Workbook | After successful IP search, press "y" | Data is not saved to spreadsheet and warning displayed to user | Works as expected |
 
 <br>
 <details>
-<summary>Save to Empty Workbook</summary>
+<summary>Save to Non Full Workbook</summary>
 <br>
-<img alt="Save to Empty Workbook Results" src="docs/images/testing-save-to-workbook.gif">
+<img alt="Save to Non Full Workbook Results" src="docs/images/testing-save-to-workbook.gif">
 </details>
 <br>
 <details>
@@ -452,7 +450,7 @@ As a result of my oversight manual testing would take up most of the responsibil
 
 | **Feature** | **Action** | **Expected Result** | **Actual Result** |
 |-------------|------------|---------------------|-------------------|
-| Display Summary Report | Steps | Expectations  | Works as expected |
+| Display Summary Report | From Main Menu input "summary report" | Contents of worksheet displaed to user in JSON format  | Works as expected |
 
 <br>
 <details>
@@ -466,7 +464,7 @@ As a result of my oversight manual testing would take up most of the responsibil
 
 | **Feature** | **Action** | **Expected Result** | **Actual Result** |
 |-------------|------------|---------------------|-------------------|
-| Clear Report | Steps | Expectations  | Works as expected |
+| Clear Report | From Main Menu input "clear report"  | clears data from spreadsheet and notifies user  | Works as expected |
 
 <br>
 <details>
@@ -480,9 +478,9 @@ As a result of my oversight manual testing would take up most of the responsibil
 
 | **Feature** | **Action** | **Expected Result** | **Actual Result** |
 |-------------|------------|---------------------|-------------------|
-| First Run Load in Checks | Steps | Expectations  | Works as expected |
-| Main Menu | Steps | Expectations  | Works as expected |
-| Help Command | Steps | Expectations  | Works as expected |
+| First Run Load in Checks | Executes when app is reloaded | Checks shodan and google sheets are responsive and displays capability summary and storage readiness  | Works as expected |
+| Main Menu | Input commands and hit return | Input commands should be validated and execute as per special command or be checked against shodan for results.  | Works as expected |
+| Help Command | From Main Menu input "help" | App should present user with help message  | Works as expected |
 
 <br>
 <details>
@@ -508,7 +506,7 @@ As a result of my oversight manual testing would take up most of the responsibil
 
 | **Feature** | **Action** | **Expected Result** | **Actual Result** |
 |-------------|------------|---------------------|-------------------|
-| Help Command | Steps | Expectations  | Works as expected |
+| Help Command | From Main Menu input "help" | App should present user with help message  | Works as expected |
 
 <br>
 <details>
@@ -522,7 +520,7 @@ As a result of my oversight manual testing would take up most of the responsibil
 
 | **Feature** | **Action** | **Expected Result** | **Actual Result** |
 |-------------|------------|---------------------|-------------------|
-| Main Menu | Steps | Expectations  | Works as expected |
+| Main Menu | Input commands and hit return | Input commands should be validated and execute as per special command or be checked against shodan for results.  | Works as expected |
 
 <br>
 <details>
@@ -536,7 +534,7 @@ As a result of my oversight manual testing would take up most of the responsibil
 
 | **Feature** | **Action** | **Expected Result** | **Actual Result** |
 |-------------|------------|---------------------|-------------------|
-| Main Menu | Steps | Expectations  | Works as expected |
+| Main Menu | Input commands and hit return | Input commands should be validated and execute as per special command or be checked against shodan for results.  | Works as expected |
 
 <br>
 <details>
@@ -550,7 +548,7 @@ As a result of my oversight manual testing would take up most of the responsibil
 
 | **Feature** | **Action** | **Expected Result** | **Actual Result** |
 |-------------|------------|---------------------|-------------------|
-| First Run Load in Checks | Steps | Expectations  | Works as expected |
+| First Run Load in Checks | Executes when app is reloaded | Checks shodan and google sheets are responsive and displays capability summary and storage readiness  | Works as expected |
 
 <br>
 <details>
@@ -564,9 +562,9 @@ As a result of my oversight manual testing would take up most of the responsibil
 
 | **Feature** | **Action** | **Expected Result** | **Actual Result** |
 |-------------|------------|---------------------|-------------------|
-| First Run Load in Checks | Steps | Expectations  | Works as expected |
-| Save Search to Workbook | Steps | Expectations  | Works as expected |
-| Clear Report | Steps | Expectations  | Works as expected |
+| First Run Load in Checks | Executes when app is reloaded | Checks shodan and google sheets are responsive and displays capability summary and storage readiness  | Works as expected |
+| Save Search to Full Workbook | After successful IP search, press "y" | Data is not saved to spreadsheet and warning displayed to user | Works as expected |
+| Clear Report | From Main Menu input "clear report"  | clears data from spreadsheet and notifies user  | Works as expected |
 
 <br>
 <details>
