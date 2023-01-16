@@ -6,10 +6,11 @@
 
 [Live Site](https://bhero-shodan.herokuapp.com/) is hosted on heroku as a node.js app running python 3 code.
 
+[Google Sheet](https://docs.google.com/spreadsheets/d/1M0zQoGMlJFKAZRlaijUbdoycJxjvHleksSBca_8Yu3w/edit#gid=387475559) to store results
 
 ### TODO:
 
-+ Write User Manual
+
 + Finish Testing the User Stories
 + Create release branch and document in deployment
 + Comments to have doc strings
@@ -82,7 +83,44 @@ Security enthusiasts/professionals interested in reporting on the status of thei
 
 ### User Manual
 
-TODO
+On initial load the application will query Google Sheets and the SHodan API to try and ensure remote endpoints are set up as expected.
+
+An error may throw here if permissions are not set correctly on your files or the API key is incorrect.
+
+Please follow steps in [Deployment & Local Development](#deployment) to troubleshoot this.
+
+Once ready the app will present the user with the following text:
+
+``` sh
+[+] Please enter the IP Address for Shodan to Query
+[+] Use help command for more info
+[+] Enter command or IP Address:
+```
+
+Here the user can input one of several special commands:
+
+`help`: displays a list of commands the user can execute along with helpful information about how to use the search functionality
+`info`: Returns a summary of shodan's capabilities based on your API key. You can then view the services and protocols by entering a 'Y' or 'y' when prompted.
+`summary report`: Reaches out to your google sheet and returns all the data in json form.
+`clear report`: Reaches out to your google sheet, deletes the worksheet and re-creates a blank worksheet.
+
+Any other input is treated as an IP, if the user's input passes the app's validation check the string is forwarded to shodan where either the API will respond to the user's IP or deliver an error message explaining why no data has been returned.
+
+The most common issue will be the IP not showing up in the shodan dB, the following IPs are known to have worked:
+
++ 8.8.8.8
++ 162.243.69.95
++ 171.248.148.180
++ 31.199.40.207
++ 8.8.4.4
++ 174.142.208.197
++ 86.110.30.26
++ 149.22.187.117
++ 176.96.154.158
++ 151.252.83.215
++ 209.222.212.30
++ 180.69.12.106
+
 
 ### User Stories
 
