@@ -8,10 +8,6 @@
 
 [Google Sheet](https://docs.google.com/spreadsheets/d/1M0zQoGMlJFKAZRlaijUbdoycJxjvHleksSBca_8Yu3w/edit#gid=387475559) to store results
 
-### TODO:
-
-+ Create release branch and document in deployment
-
 ## About
 
 As part of professional services pentration testers utilise Open-source intelligence (OSINT) gathering on public facing endpoints to learn as much as they can about target environments.
@@ -636,7 +632,7 @@ To fork this repository:
 A custom Heroku app was used to deploy the demo website, however deploying the code for local use can be accomplished by can be accomplished by cloning the release branch: 
 
 ``` sh
-git clone <url>
+git clone --branch release git@github.com:bovinehero/shodan-heroku.git
 ```
 
 in your python 3 env (use venv as required), move to the directory that you have cloned the code to and run:
