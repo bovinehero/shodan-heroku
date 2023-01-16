@@ -8,6 +8,9 @@
 
 [Google Sheet](https://docs.google.com/spreadsheets/d/1M0zQoGMlJFKAZRlaijUbdoycJxjvHleksSBca_8Yu3w/edit#gid=387475559) to store results
 
+
+For loacal version of the tool use the [release](https://github.com/bovinehero/shodan-heroku/tree/release) version of this repo
+
 ## About
 
 As part of professional services pentration testers utilise Open-source intelligence (OSINT) gathering on public facing endpoints to learn as much as they can about target environments.
