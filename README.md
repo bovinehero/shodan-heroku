@@ -317,7 +317,7 @@ As a result of my oversight manual testing would take up most of the responsibil
 <details>
 <summary>Story Results</summary>
 <br>
-<img alt="X Test Results" src="docs/images/testing-feature1.gif">
+<img alt="X Test Results" src="docs/images/testing-ip-search.gif">
 </details>
 
 2. As a __User__, I would like instructions on how to use this tool
@@ -448,9 +448,9 @@ As a result of my oversight manual testing would take up most of the responsibil
 </details>
 <br>
 <details>
-<summary>Story Results</summary>
+<summary>Main Menu</summary>
 <br>
-<img alt="X Test Results" src="docs/images/testing-feature2.gif">
+<img alt="Main Menu Results" src="docs/images/testing-main-menu.gif">
 </details>
 <br>
 <details>
@@ -480,9 +480,9 @@ As a result of my oversight manual testing would take up most of the responsibil
 
 <br>
 <details>
-<summary>Story Results</summary>
+<summary>Main Menu</summary>
 <br>
-<img alt="X Test Results" src="docs/images/testing-main-menu.gif">
+<img alt="Main Menu Results" src="docs/images/testing-main-menu.gif">
 </details>
 
 11. As an __Owner__, I want data entry to be validated, to guide the user on how to correctly format the input
@@ -493,9 +493,9 @@ As a result of my oversight manual testing would take up most of the responsibil
 
 <br>
 <details>
-<summary>Story Results</summary>
+<summary>Main Menu</summary>
 <br>
-<img alt="X Test Results" src="docs/images/testing-main-menu.gif">
+<img alt="Main Menu Results" src="docs/images/testing-main-menu.gif">
 </details>
 
 12. As an __Owner__, I want the user to be notified on start up if the app is going to fail due to missing upstream/downstream  
