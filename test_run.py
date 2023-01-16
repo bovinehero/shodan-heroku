@@ -1,3 +1,5 @@
+"""Module providing unit testing of shodan_helper."""
+
 import re
 import run
 
@@ -14,7 +16,9 @@ INPUTS = [
     "fgnwciugwancHGAN0UGO GNCWAOPUGNT WEF"
 ]
 
+
 def test_validation():
+    """ Check inputs against input validator """
     for input_str in INPUTS:
         output = run.validate_user_input(input_str)
         if not re.search(IP_REGEX, input_str):

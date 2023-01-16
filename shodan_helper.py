@@ -9,7 +9,13 @@ SERVICE = 'nginx'
 
 
 def read_json_file(json_file):
-    """ read local json file and return as dictionary """
+    """ read local json file and return as dictionary
+    Parameters:
+    json_file(str) name of the json file to be read
+
+    Returns:
+    dict: contents of file
+    """
     filename = os.path.join(json_file)
     try:
         with open(filename, mode='r', encoding='utf-8') as f_opened:
@@ -27,35 +33,47 @@ class ShodanAPI():
         self.api = shodan.Shodan(shodan_api_key)
 
     def api_info(self):
-        """ return dict of api functionality API key has access to """
+        """ fetch functionality API key has access to
+        Returns:
+        dict: API usage allowances based on API key
+        """
         return self.api.info()
 
     def services_scanned(self):
-        """ return dict of services shodan has scanned """
+        """ fetch services shodan scans
+        Returns:
+        list: Service name and description key pair values \
+        of services shodan can scan
+        """
         return self.api.services()
 
     def protocols_scanned(self):
-        """ return dict of ports and protocols shodan has scanned """
+        """ fetch ports and protocols shodan can scan
+        Returns:
+        list: Port and Protocol key pair values of protocls \
+        shodan scans by default
+        """
         return self.api.protocols()
 
     def ports_scanned(self):
-        """ return list of ports shodan has scanned """
+        """ fetch ports shodan can scan
+        Returns:
+        list: Port Numbers shodan scans by default
+        """
         return self.api.ports()
 
     def ip_scanned(self, target_ip):
-        """ return dict based on ip string """
+        """ fetch machine details from the shodan dB
+        Parameters:
+        target_ip(str) target IP to be checked against the API
+
+        Returns:
+        dict: contents of file
+        None: if no IP found or other error discovered
+        """
         try:
             return self.api.host(target_ip)
         except shodan.exception.APIError as err:
             print(f'[-] Shodan responds: {err}')
             print('[-] Please try a different target or contact administrator')
             return None
-
-if __name__ == "__main__":
-    print("Calling Shodan to check env is set correctly")
-    shodan_call_one = ShodanAPI(SHODAN_SECRETS_FILE)
-    print(shodan_call_one.api_info())
-    print(shodan_call_one.protocols_scanned())
-    print(shodan_call_one.services_scanned())
-    print(shodan_call_one.ports_scanned())
-    print(shodan_call_one.ip_scanned(IP))

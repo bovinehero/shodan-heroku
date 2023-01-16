@@ -15,7 +15,6 @@ SCOPE = [
     "https://www.googleapis.com/auth/drive"
 ]
 
-# testing connectivity - change to shodan data
 SHEET_TITLE = "shodan"
 SECRETS_FILE = "gspread_secrets.json"
 CREDS = Credentials.from_service_account_file(filename=SECRETS_FILE)
@@ -44,7 +43,14 @@ REPORT_HEADERS = [
 
 
 def first_run_check(sheet_title="ip scans"):
-    """ set up the env """
+    """ checks that the env is set up
+    Checks Google Sheets for active worksheet
+    creates one if not there
+    contacts Shhodan and displays summary of capability
+    prints fun message for user
+    Parameters:
+    sheet_title(str): name of the worksheet to save to
+    """
     try:
         work_sheet = SHEET.worksheet(title=sheet_title)
         data = work_sheet.get_all_values()
@@ -61,7 +67,19 @@ def first_run_check(sheet_title="ip scans"):
 
 
 def tool_capability(info, first_load):
-    """ Detail tool capabiliies """
+    """ Detail tool capability
+    Reaches out to shodan to collect API
+    If run the first time, skips the ask user for confirmation
+    Parameters:
+    info(dict): Response from Shodan API
+        dict: API usage allowances based on API key
+        list: Port and Protocol key pair values of protocls \
+        shodan scans by default
+        list: Service name and description key pair values \
+        of services shodan can scan
+        list: Port Numbers shodan scans by default
+    first_load(bool): True if run first time
+    """
     print(f"\n[+] API connected on the {info['api_info']['plan']} plan ")
     if info['api_info']['usage_limits']['scan_credits'] > 0:
         print(f"[+] Total Scan Credits: \
@@ -98,10 +116,29 @@ ports")
 
 def analyse_data(json_data, sheet_title="ip scans"):
     """
-    Get IP target for shodan query.
-    Run a while loop to collect a valid string of data from the user
-    via the terminal, which must be a valid IPv4 String.
-    The loop will repeatedly request data, until it is valid.
+    examine data from shodan query.
+    if json data is returned, format it for viewing and worksheet
+    Provide user interaction to save to workbook
+    Parameters:
+    json_data(dict): Response from Shodan API
+        Must contain:
+            json_data['ip_str']
+            json_data['city']
+            json_data['region_code']
+            json_data['os']
+            json_data['tags']
+            json_data['isp']
+            json_data['area_code']
+            json_data['longitude']
+            json_data['last_update']
+            json_data['ports'])
+            json_data['latitude']
+            json_data['hostnames'])
+            json_data['country_code']
+            json_data['country_name']
+            json_data['domains']
+            json_data['org']
+    sheet_title(str): name of the worksheet to save to
     """
     if json_data:
         ip_addr = str(json_data['ip_str'])
@@ -178,6 +215,10 @@ def get_query_data():
     Run a while loop to collect a valid string of data from the user
     via the terminal, which must be a valid IPv4 String.
     The loop will repeatedly request data, until it is valid.
+    Input:
+    Prompt user for a value to validate
+    Returns:
+    ip_str(str): String entered by user
     """
     while True:
         print('\n[+] Please enter the IP Address for Shodan to Query')
@@ -190,9 +231,15 @@ def get_query_data():
 
 def validate_user_input(ip_str):
     """
-    Checks if user selected help.
+    Checks if user selected special command.
     Checks if input is valid ipv4.
-    Raises ValueError if not.
+    If Valid IP, call shodan
+    else run special commands:
+        info, help, clear or display results
+    Parameters:
+    ip_str(str): text to be validated
+    Returns:
+    Bool: True if Valid IP, else False
     """
     valid_regex = \
         "^((25[0-5]|2[0-4][0-9]|1[0-9][0-9]|[1-9]?[0-9])\
@@ -220,7 +267,16 @@ def validate_user_input(ip_str):
 
 
 def tool_info():
-    """ Fetch tooling info """
+    """ Fetch tooling info from shodan
+    Returns:
+    dict:
+        dict: API usage allowances based on API key
+        list: Port and Protocol key pair values of protocls \
+        shodan scans by default
+        list: Service name and description key pair values \
+        of services shodan can scan
+        list: Port Numbers shodan scans by default
+    """
     shodan_call = shodan_helper.ShodanAPI(
         secrets_file=shodan_helper.SHODAN_SECRETS_FILE
         )
@@ -234,7 +290,12 @@ def tool_info():
 
 
 def fetch_gspread_data(sheet_title="ip scans"):
-    """ fetch all data from worksheet, default is ip scans """
+    """ fetch all data from worksheet, default is ip scans
+    Parameters:
+    sheet_title(str) name of the worksheet to create
+    Returns:
+    list: contents of sheet in key pair format
+    """
     data = []
     try:
         work_sheet = SHEET.worksheet(title=sheet_title)
@@ -252,7 +313,7 @@ def fetch_gspread_data(sheet_title="ip scans"):
 
 
 def tool_help():
-    """ run help text """
+    """ display help text for user """
     print("""\n[!] Special Commands:
 \n\tinfo: ask shodan for capabilities based on your API key.
 \n\tclear report: this will clear the exisitng data from the report.
@@ -264,7 +325,10 @@ def tool_help():
 
 
 def clear_worksheet(sheet_title="ip scans"):
-    """ this will clear the google sheet for a new report """
+    """ this will clear the google sheet for a new report
+    Parameters:
+    sheet_title(str) name of the worksheet to clear
+    """
     print('\n[!] Clearing down the worksheet')
     col_count = len(REPORT_HEADERS)
     row_rount = TARGET_LIMIT+1
@@ -279,7 +343,10 @@ def clear_worksheet(sheet_title="ip scans"):
 
 
 def kickstart_report_sheet(sheet_title="ip scans"):
-    """ kickstart a new report worksheet with basic formatting """
+    """ kickstart a new report worksheet with basic formatting
+    Parameters:
+    sheet_title(str) name of the worksheet to create
+    """
     work_sheet = SHEET.worksheet(title=sheet_title)
     work_sheet.clear()
     work_sheet.update('1:1', [REPORT_HEADERS])
