@@ -47,7 +47,7 @@ class ShodanAPI():
         try:
             return self.api.host(target_ip)
         except shodan.exception.APIError as err:
-            print(f'[-] {err}')
+            print(f'[-] Shodan responds: {err}')
             print('[-] Please try a different target or contact administrator')
             return None
 
