@@ -12,7 +12,6 @@
 + Write User Manual
 + Finish Testing the User Stories
 + Create release branch and document in deployment
-+ Data storage data models in workflow
 + Comments to have doc strings
 
 ## About
@@ -164,6 +163,8 @@ The Flowchart below shows the initial concept for the site.
 <img alt="Flowchart image for app" src="docs/images/shodan-db-search-white.png">
 </details>
 
+Persistent data for the app is managed in Google Sheets
+
 ## Technologies Used
 
 ### Languages
@@ -189,15 +190,15 @@ HTML, CSS and JavaScript were used to create the website in heroku.
 ### Libraries
 
 #### Python3 Libraries
-json - used to handle json file to dictionary and vice versa.
-re - used in input validation for IP Addresses.
-time - used to delay output to screen.
-os - used to pick up env variable files
++ json - used to handle json file to dictionary and vice versa.
++ re - used in input validation for IP Addresses.
++ time - used to delay output to screen.
++ os - used to pick up env variable files
 
 #### Third Party Libraries
-[shodan](https://pypi.org/project/shodan/) - used to query shodan web services.
-[gspread](https://pypi.org/project/gspread/) - add and manipulate data in Google Sheets.
-[google-auth-oauthlib](https://pypi.org/project/google-auth-oauthlib/) - used to set up the authentification needed to access the Google API and Google Sheets. 
++ [shodan](https://pypi.org/project/shodan/) - used to query shodan web services.
++ [gspread](https://pypi.org/project/gspread/) - add and manipulate data in Google Sheets.
++ [google-auth-oauthlib](https://pypi.org/project/google-auth-oauthlib/) - used to set up the authentification needed to access the Google API and Google Sheets. 
 
 ## Features
 
@@ -227,7 +228,7 @@ os - used to pick up env variable files
   + Can print out the services and port pairing it checks by default for vulnerabilities
   + Uses same logic as the first run load in checks feature, but applies interactivity based on the function not being executed on launch.
     + User Stories Covered: 3, 4
-    + Screenshot. <br> ![Info Command](docs/images/feature-info-commandinfo.png)
+    + Screenshot. <br> ![Info Command](docs/images/feature-info-command.png)
 
 + IP Search:
   + Validates an IP Address is valid
@@ -319,6 +320,7 @@ As a result of my oversight manual testing would take up most of the responsibil
 <br>
 <img alt="X Test Results" src="docs/images/testing-ip-search.gif">
 </details>
+<br>
 
 2. As a __User__, I would like instructions on how to use this tool
 
@@ -332,6 +334,7 @@ As a result of my oversight manual testing would take up most of the responsibil
 <br>
 <img alt="Help Command Results" src="docs/images/testing-help-command.gif">
 </details>
+<br>
 
 3. As a __User__, I would like to view what services the shodan API scans
 
@@ -358,6 +361,7 @@ As a result of my oversight manual testing would take up most of the responsibil
 <br>
 <img alt="Info Command Results" src="docs/images/testing-info-command-display-services.gif">
 </details>
+<br>
 
 4. As a __User__, I woud like to view the protocols shodan searches for
 
@@ -384,6 +388,7 @@ As a result of my oversight manual testing would take up most of the responsibil
 <br>
 <img alt="Info Command Results" src="docs/images/testing-info-command-display-protocols.gif">
 </details>
+<br>
 
 5. As a __User__, I would like to be able to save my scan results
 
@@ -403,7 +408,7 @@ As a result of my oversight manual testing would take up most of the responsibil
 <br>
 <img alt="Save to Empty Workbook Results" src="docs/images/testing-save-to-full-workbook.gif">
 </details>
-
+<br>
 
 6. As a __User__, I would like to retrieve my saved scan results
 
@@ -417,6 +422,7 @@ As a result of my oversight manual testing would take up most of the responsibil
 <br>
 <img alt="Display Summary Report Results" src="docs/images/testing-display-summary.gif">
 </details>
+<br>
 
 7. As a __User__, I would like to be able to start a new report when I'm done with the old one
 
@@ -430,7 +436,7 @@ As a result of my oversight manual testing would take up most of the responsibil
 <br>
 <img alt="Clear Report Results" src="docs/images/testing-clear-report.gif">
 </details>
-
+<br>
 
 8. As an __Owner__, I want users to have a positive experience whilst using the app
 
@@ -458,6 +464,7 @@ As a result of my oversight manual testing would take up most of the responsibil
 <br>
 <img alt="Help Command Results" src="docs/images/testing-help-command.gif">
 </details>
+<br>
 
 9. As an __Owner__, I want users to easily discover how to use the app
 
@@ -471,6 +478,7 @@ As a result of my oversight manual testing would take up most of the responsibil
 <br>
 <img alt="Help Command Results" src="docs/images/testing-help-command.gif">
 </details>
+<br>
 
 10. As an __Owner__, I want the user to get feedback in case of wrong input
 
@@ -484,6 +492,7 @@ As a result of my oversight manual testing would take up most of the responsibil
 <br>
 <img alt="Main Menu Results" src="docs/images/testing-main-menu.gif">
 </details>
+<br>
 
 11. As an __Owner__, I want data entry to be validated, to guide the user on how to correctly format the input
 
@@ -497,6 +506,7 @@ As a result of my oversight manual testing would take up most of the responsibil
 <br>
 <img alt="Main Menu Results" src="docs/images/testing-main-menu.gif">
 </details>
+<br>
 
 12. As an __Owner__, I want the user to be notified on start up if the app is going to fail due to missing upstream/downstream  
 
@@ -510,6 +520,7 @@ As a result of my oversight manual testing would take up most of the responsibil
 <br>
 <img alt="First Run Load in Checks Results" src="docs/images/testing-first-run-load-in-checks.gif">
 </details>
+<br>
 
 13. As an __Owner__, I want users to be able to use this tool within the limits of the API key and reasonable Google Storage limits
 
@@ -543,7 +554,7 @@ As a result of my oversight manual testing would take up most of the responsibil
 <br>
 <img alt="Clear Report Results" src="docs/images/testing-clear-report.gif">
 </details>
-
+<br>
 
 ## Bugs
 
@@ -570,15 +581,6 @@ or clear report data')
 
   #...
 ```
-
-
-### Big Bug One
-
-Bug summary
-
-Steps to replicate
-
-[ref](https://developer.mozilla.org/en-US/docs/Web/CSS/:autofill)
 
 ## Deployment & Local Development
 
