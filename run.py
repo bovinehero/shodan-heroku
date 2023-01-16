@@ -211,7 +211,7 @@ def validate_user_input(ip_str):
         tool_capability(info=tool_info(), first_load=False)
         return False
     elif re.search(valid_regex, ip_str):
-        print('\n[+] Valid IP address')
+        print('\n[+] Valid IP address format')
         return True
     else:
         print(f'\n[-] You entered "{ip_str}"')
