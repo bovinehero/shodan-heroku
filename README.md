@@ -627,8 +627,6 @@ To fork this repository:
 
 ### Deployment
 
-> TODO: update this
-
 A custom Heroku app was used to deploy the demo website, however deploying the code for local use can be accomplished by can be accomplished by cloning the release branch: 
 
 ``` sh
